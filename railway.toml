@@ -1,5 +1,6 @@
+# Root Directory Railway doit être VIDE (racine du repo, pas "backend")
 [build]
-buildCommand = "cd backend && npm install"
+buildCommand = "npm install --prefix backend"
 
 [deploy]
-startCommand = "cd backend && npm start"
+startCommand = "npm start --prefix backend"
