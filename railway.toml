@@ -1,6 +1,7 @@
-# Root Directory Railway doit être VIDE (racine du repo, pas "backend")
 [build]
-buildCommand = "npm install --prefix backend"
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
 
 [deploy]
-startCommand = "npm start --prefix backend"
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 3

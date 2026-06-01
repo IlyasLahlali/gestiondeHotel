@@ -61,7 +61,25 @@ app.get('/', (req, res) => {
 });
 
 
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Serveur lancé sur le port ${PORT}`);
+const listenPort = Number(process.env.PORT) || Number(PORT) || 3000;
+
+const server = app.listen(listenPort, "0.0.0.0", () => {
+  console.log(`Serveur lancé sur le port ${listenPort}`);
   console.log(`Frontend public : /Public/html/index.html`);
+  console.log(`DB_HOST=${process.env.DB_HOST || "localhost"}`);
+});
+
+server.on("error", (err) => {
+  console.error("Erreur démarrage serveur :", err.message);
+  process.exit(1);
+});
+
+process.on("uncaughtException", (err) => {
+  console.error("uncaughtException :", err);
+  process.exit(1);
+});
+
+process.on("unhandledRejection", (err) => {
+  console.error("unhandledRejection :", err);
+  process.exit(1);
 });
