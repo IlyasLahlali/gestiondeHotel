@@ -17,11 +17,35 @@ function resolveAssetVersion() {
   return String(raw).slice(0, 12);
 }
 
-function injectAssetVersion(html, assetVersion) {
-  return html.replace(
+function isPublicHtml(filePath) {
+  return filePath.replace(/\\/g, "/").includes("/Public/html/");
+}
+
+function injectHtml(html, assetVersion, filePath) {
+  let versioned = html.replace(
     /((?:href|src)\s*=\s*["'])([^"']+\.(?:css|js))(?:\?[^"']*)?(["'])/gi,
     (_, prefix, url, suffix) => `${prefix}${url}?v=${assetVersion}${suffix}`
   );
+
+  const metaTags = [
+    `<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">`,
+    `<meta http-equiv="Pragma" content="no-cache">`,
+    `<meta http-equiv="Expires" content="0">`,
+    `<meta name="hf-build" content="${assetVersion}">`
+  ].join("");
+
+  let headInject = metaTags;
+
+  if (isPublicHtml(filePath)) {
+    headInject += `<script>window.__HF_BUILD="${assetVersion}";</script>`;
+    headInject += `<script src="/Commun/publicFreshLoad.js?v=${assetVersion}"></script>`;
+  }
+
+  if (versioned.includes("<head>")) {
+    versioned = versioned.replace("<head>", `<head>${headInject}`);
+  }
+
+  return versioned;
 }
 
 function resolveHtmlPath(frontendPath, urlPath) {
@@ -60,7 +84,7 @@ function createFrontendStaticMiddleware(frontendPath) {
         return;
       }
 
-      res.type("html").send(injectAssetVersion(html, assetVersion));
+      res.type("html").send(injectHtml(html, assetVersion, filePath));
     });
   };
 

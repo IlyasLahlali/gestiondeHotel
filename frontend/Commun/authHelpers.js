@@ -12,6 +12,9 @@ function saveAuthSession(data) {
   localStorage.setItem("token", data.token);
   localStorage.setItem("user", JSON.stringify(data.user));
   localStorage.setItem("role", data.user.role);
+  if (data.user.role === "client") {
+    sessionStorage.setItem("hf_public_client", "1");
+  }
 }
 
 async function parseAuthResponse(res) {
@@ -146,9 +149,22 @@ function isClientLoggedIn() {
   }
 }
 
+function isPublicVisitorPage() {
+  return /\/Public\/html\//i.test(window.location.pathname);
+}
+
+function canReserveAsClient() {
+  if (!isClientLoggedIn()) return false;
+  if (isPublicVisitorPage()) {
+    return sessionStorage.getItem("hf_public_client") === "1";
+  }
+  return true;
+}
+
 window.setAuthMessage = setAuthMessage;
 window.saveAuthSession = saveAuthSession;
 window.bindLoginForm = bindLoginForm;
 window.bindRegisterForm = bindRegisterForm;
 window.resolveAuthReturnUrl = resolveAuthReturnUrl;
 window.isClientLoggedIn = isClientLoggedIn;
+window.canReserveAsClient = canReserveAsClient;

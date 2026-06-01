@@ -279,7 +279,7 @@ function bindReserveLoginModal() {
 }
 
 function reserver(chambreId) {
-  if (typeof isClientLoggedIn === "function" && isClientLoggedIn()) {
+  if (typeof canReserveAsClient === "function" && canReserveAsClient()) {
     window.location.href = buildClientReservationPath(chambreId);
     return;
   }
