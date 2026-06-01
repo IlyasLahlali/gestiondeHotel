@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const { PORT } = require("./config/env");
+const { createFrontendStaticMiddleware } = require("./middleware/frontendStatic");
 const db = require('./config/db');
 const hotelRoutes = require('./routes/hotelRoutes');
 const hotelImageRoutes = require('./routes/hotelImageRoutes');
@@ -27,16 +28,11 @@ app.use(cors());
 app.use(express.json({ limit: '12mb' }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-const frontendPath = path.join(__dirname, '..', 'frontend');
-app.use(express.static(frontendPath, {
-  setHeaders(res, filePath) {
-    if (/\.(html|css|js)$/i.test(filePath)) {
-      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-      res.setHeader('Pragma', 'no-cache');
-      res.setHeader('Expires', '0');
-    }
-  }
-}));
+const frontendPath = path.join(__dirname, "..", "frontend");
+const { htmlMiddleware, staticMiddleware } = createFrontendStaticMiddleware(frontendPath);
+
+app.use(htmlMiddleware);
+app.use(staticMiddleware);
 
 //authRoutes
 app.use('/api', authRoutes);
