@@ -19,7 +19,8 @@ function loadEnvFile() {
     ) {
       value = value.slice(1, -1);
     }
-    if (value !== "" || process.env[key] === undefined) {
+    // Ne pas écraser les variables Railway/Render (ex. PORT injecté par la plateforme)
+    if (process.env[key] === undefined && value !== "") {
       process.env[key] = value;
     }
   }
