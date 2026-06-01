@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Hôtels - Administration</title>
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="icon" href="../../images/logo.svg" type="image/svg+xml">
+</head>
+<body class="admin-page admin-hotels-page" data-auth-role="admin">
+
+<header class="dashboard-header admin-header">
+  <a href="Dashboard.html" class="logo app-brand logo--upgraded" aria-label="HôtelFacile Smart — Accueil"><span class="app-logo__mark" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><defs><linearGradient id="hf-logo-bg" x1="64" y1="48" x2="448" y2="464" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#3B82F6"/><stop offset="100%" stop-color="#2F64EA"/></linearGradient></defs><rect width="512" height="512" rx="108" fill="url(#hf-logo-bg)"/><path fill="#FFFFFF" d="M256 108 132 200v188h88V272h72v116h88V200L256 108z"/><rect x="228" y="292" width="56" height="96" rx="6" fill="#2F64EA"/><rect x="204" y="228" width="28" height="28" rx="4" fill="#2F64EA"/><rect x="280" y="228" width="28" height="28" rx="4" fill="#2F64EA"/><circle cx="372" cy="140" r="52" fill="#FBBF24"/><path fill="#FFFFFF" d="M372 108l9 27h29l-23 17 9 27-24-18-24 18 9-27-23-17h29z"/></svg></span><img class="app-logo__img app-logo__img--fallback" src="../../images/logo.svg" alt="" width="56" height="56" decoding="async"><span class="app-logo__text"><span class="app-logo__name">HôtelFacile <em>Smart</em></span><span class="app-logo__subtitle">Administration</span></span></a>
+  <nav class="nav admin-dashboard-nav">
+    <a href="#welcomeSection">Accueil</a>
+    <a href="#adminHotels">Hôtels</a>
+    <a href="#footer">Contact</a>
+    <div data-notifications-bell></div>
+    <div data-profile-menu></div>
+  </nav>
+</header>
+
+<div class="app-back-bar">
+  <button type="button" class="app-back-btn" onclick="window.location.href='Dashboard.html'">
+    <span class="app-back-btn-icon" aria-hidden="true">←</span>
+    Retour
+  </button>
+</div>
+
+<main class="admin-main">
+
+<section id="welcomeSection" class="card welcome-section admin-hero admin-hotels-hero">
+  <h2>Liste des hôtels</h2>
+  <p>Consultez, filtrez et modérez tous les établissements de la plateforme.</p>
+</section>
+
+<section id="adminSearch" class="card">
+  <h2>🔍 Rechercher un hôtel</h2>
+  <input type="text" id="searchHotel" name="hotel" placeholder="Nom de l'hôtel">
+  <input type="text" id="searchPrenom" name="prenom" placeholder="Prénom propriétaire">
+  <input type="text" id="searchNom" name="nom" placeholder="Nom propriétaire">
+  <select id="searchVille" name="ville">
+    <option value="">Toutes les villes</option>
+    <option>Marrakech</option>
+    <option>Rabat</option>
+    <option>Casablanca</option>
+    <option>Tanger</option>
+    <option>Fès</option>
+    <option>Agadir</option>
+    <option>Oujda</option>
+    <option>Meknès</option>
+  </select>
+  <button type="button" class="dashboard-search-btn" onclick="submitAdminSearch()">Rechercher</button>
+</section>
+
+<section id="adminHotels" class="card admin-section admin-panel">
+  <div class="admin-list-header">
+    <h2 class="admin-panel-title">🏨 Hôtels enregistrés</h2>
+    <div class="admin-filters">
+      <button type="button" class="admin-filter-btn active" data-statut="" onclick="setFilter(this, '')">Tous</button>
+      <button type="button" class="admin-filter-btn" data-statut="en_attente" onclick="setFilter(this, 'en_attente')">En attente</button>
+      <button type="button" class="admin-filter-btn" data-statut="valide" onclick="setFilter(this, 'valide')">Validés</button>
+      <button type="button" class="admin-filter-btn" data-statut="refuse" onclick="setFilter(this, 'refuse')">Refusés</button>
+    </div>
+  </div>
+  <p id="hotelsCount" class="admin-count"></p>
+  <div id="hotelsList" class="admin-hotel-grid"></div>
+  <p id="adminMessage" class="admin-feedback"></p>
+</section>
+
+</main>
+
+<footer id="footer" class="footer">
+  <div class="footer-container">
+    <div class="footer-section">
+      <h3>🏨 HôtelFacile Smart</h3>
+      <p>Administration de la plateforme de réservation d'hôtels au Maroc.</p>
+    </div>
+    <div class="footer-section">
+      <h4>Liens</h4>
+      <ul class="footer-links">
+        <li><a href="Dashboard.html">Tableau de bord</a></li>
+        <li><a href="hotel.html">Hôtels</a></li>
+        <li><a href="../../Public/html/index.html">Site public</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>Contact</h4>
+      <p>📍 Marrakech, Maroc</p>
+      <p>✉️ contact@hotelfacilesmart.com</p>
+    </div>
+    <div class="footer-section">
+      <h4>Suivez-nous</h4>
+      <div class="social-icons">
+        <a href="#">📘</a>
+        <a href="#">📷</a>
+        <a href="#">🔗</a>
+        <a href="#">💬</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 HôtelFacile Smart. Tous droits réservés.</p>
+  </div>
+</footer>
+
+<script src="../../Commun/runtimeConfig.js"></script>
+<script src="../../Commun/paths.js"></script>
+<script src="../../Commun/appBrand.js" data-base="../../"></script>
+<script src="../../Commun/notificationsBell.js"></script>
+<script src="../../Commun/profileMenu.js"></script>
+<script src="../../Commun/hotelImageUrl.js"></script>
+<script src="../js/hotel.js?v=20260622"></script>
+</body>
+</html>

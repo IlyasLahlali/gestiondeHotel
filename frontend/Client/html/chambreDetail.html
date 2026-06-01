@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chambres — HôtelFacile Smart</title>
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="icon" href="../../images/logo.svg" type="image/svg+xml">
+</head>
+<body class="chambre-detail-page" data-auth-role="client">
+
+
+<header class="header">
+  <a href="Dashboard.html" class="logo app-brand logo--upgraded" aria-label="HôtelFacile Smart — Accueil"><span class="app-logo__mark" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><defs><linearGradient id="hf-logo-bg" x1="64" y1="48" x2="448" y2="464" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#3B82F6"/><stop offset="100%" stop-color="#2F64EA"/></linearGradient></defs><rect width="512" height="512" rx="108" fill="url(#hf-logo-bg)"/><path fill="#FFFFFF" d="M256 108 132 200v188h88V272h72v116h88V200L256 108z"/><rect x="228" y="292" width="56" height="96" rx="6" fill="#2F64EA"/><rect x="204" y="228" width="28" height="28" rx="4" fill="#2F64EA"/><rect x="280" y="228" width="28" height="28" rx="4" fill="#2F64EA"/><circle cx="372" cy="140" r="52" fill="#FBBF24"/><path fill="#FFFFFF" d="M372 108l9 27h29l-23 17 9 27-24-18-24 18 9-27-23-17h29z"/></svg></span><img class="app-logo__img app-logo__img--fallback" src="../../images/logo.svg" alt="" width="56" height="56" decoding="async"><span class="app-logo__text"><span class="app-logo__name">HôtelFacile <em>Smart</em></span></span></a>
+  <nav class="nav">
+    <a href="Dashboard.html#hotels">Hôtels</a>
+    <a href="Dashboard.html#destinations">Destinations</a>
+    <a href="Dashboard.html#why-us">À propos</a>
+    <a href="Dashboard.html#footer">Contact</a>
+    <button type="button" class="btn-nav-client btn-nav-client--primary" onclick="goReservations()">Mes réservations</button>
+    <button type="button" class="btn-nav-client btn-nav-client--ghost" onclick="goFavoris()">Mes favoris</button>
+    <div data-notifications-bell></div>
+    <div data-profile-menu></div>
+  </nav>
+</header>
+
+<div class="app-back-bar">
+  <button type="button" class="app-back-btn" onclick="if(window.history.length>1){history.back();}else{window.location.href='Dashboard.html';}">
+    <span class="app-back-btn-icon" aria-hidden="true">←</span>
+    Retour
+  </button>
+</div>
+
+<main class="chambre-detail-main">
+  <section id="hotelSummary" class="chambre-hotel-summary"></section>
+  <section class="chambre-list-section">
+    <div class="section-head">
+      <span class="section-tag">Disponibilités</span>
+      <h2>Choisir une chambre</h2>
+      <p id="chambresCount"></p>
+    </div>
+    <div id="chambresList" class="chambres-grid"></div>
+  </section>
+</main>
+
+<div id="modalReservation" class="modal-overlay" style="display:none;">
+  <div class="modal-box">
+    <h3>Réserver cette chambre</h3>
+    <p id="reservationSummary" class="reservation-modal-summary"></p>
+    <label for="resStart">Date début</label>
+    <input type="date" id="resStart">
+    <label for="resEnd">Date fin</label>
+    <input type="date" id="resEnd">
+    <div class="modal-actions">
+      <button type="button" class="btn-primary" onclick="confirmReservation()">Confirmer</button>
+      <button type="button" class="btn-secondary" onclick="closeReservationModal()">Annuler</button>
+    </div>
+  </div>
+</div>
+
+<footer id="footer" class="footer">
+  <div class="footer-container">
+    <div class="footer-section">
+      <h3>🏨 HôtelFacile Smart</h3>
+      <p>Votre partenaire de confiance pour des séjours inoubliables. Réservez facilement, rapidement et intelligemment.</p>
+    </div>
+    <div class="footer-section">
+      <h4>Liens rapides</h4>
+      <ul class="footer-links">
+        <li><a href="Dashboard.html">Accueil</a></li>
+        <li><a href="Dashboard.html#search">Rechercher</a></li>
+        <li><a href="reservationDetail.html">Mes réservations</a></li>
+        <li><a href="Dashboard.html#destinations">Destinations</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>Contact</h4>
+      <p>📍 123 Avenue, 12000 Marrakech</p>
+      <p>📞 +212 6 23 45 67 89</p>
+      <p>✉️ contact@hotelfacilesmart.com</p>
+    </div>
+    <div class="footer-section">
+      <h4>Suivez-nous</h4>
+      <p>Offres exclusives et conseils voyage.</p>
+      <div class="social-icons">
+        <a href="#" aria-label="Facebook">📘</a>
+        <a href="#" aria-label="Instagram">📷</a>
+        <a href="#" aria-label="LinkedIn">🔗</a>
+        <a href="#" aria-label="WhatsApp">💬</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 HôtelFacile Smart. Tous droits réservés.</p>
+  </div>
+</footer>
+
+<script>
+function goReservations() { window.location.href = "reservationDetail.html"; }
+function goFavoris() { window.location.href = "favoris.html"; }
+</script>
+<script src="../../Commun/runtimeConfig.js"></script>
+<script src="../../Commun/paths.js"></script>
+<script src="../../Commun/appBrand.js" data-base="../../"></script>
+<script src="../../Commun/hotelImageUrl.js"></script>
+<script src="../../Commun/galleryLightbox.js"></script>
+<script src="../../Commun/notificationsBell.js"></script>
+<script src="../../Commun/profileMenu.js"></script>
+<script src="../js/chambreDetail.js"></script>
+</body>
+</html>

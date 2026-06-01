@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscription Client - HôtelFacile Smart</title>
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="icon" href="../../images/logo.svg" type="image/svg+xml">
+</head>
+<body class="auth-page" data-auth-role="client">
+
+
+<header class="header auth-header">
+  <div class="logo logo--upgraded"><a href="Dashboard.html" class="app-brand" aria-label="HôtelFacile Smart — Accueil"><span class="app-logo__mark" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><defs><linearGradient id="hf-logo-bg" x1="64" y1="48" x2="448" y2="464" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#3B82F6"/><stop offset="100%" stop-color="#2F64EA"/></linearGradient></defs><rect width="512" height="512" rx="108" fill="url(#hf-logo-bg)"/><path fill="#FFFFFF" d="M256 108 132 200v188h88V272h72v116h88V200L256 108z"/><rect x="228" y="292" width="56" height="96" rx="6" fill="#2F64EA"/><rect x="204" y="228" width="28" height="28" rx="4" fill="#2F64EA"/><rect x="280" y="228" width="28" height="28" rx="4" fill="#2F64EA"/><circle cx="372" cy="140" r="52" fill="#FBBF24"/><path fill="#FFFFFF" d="M372 108l9 27h29l-23 17 9 27-24-18-24 18 9-27-23-17h29z"/></svg></span><img class="app-logo__img app-logo__img--fallback" src="../../images/logo.svg" alt="" width="56" height="56" decoding="async"><span class="app-logo__text"><span class="app-logo__name">HôtelFacile <em>Smart</em></span></span></a></div>
+  <nav class="nav">
+    <a href="../../Public/html/index.html">Accueil</a>
+    <a href="login.html">Connexion</a>
+  </nav>
+</header>
+
+<div class="app-back-bar">
+  <button type="button" class="app-back-btn" onclick="if(window.history.length>1){history.back();}else{window.location.href='../../Public/html/index.html';}">
+    <span class="app-back-btn-icon" aria-hidden="true">←</span>
+    Retour
+  </button>
+</div>
+
+<main class="auth-main">
+  <section class="auth-brand">
+    <div class="auth-brand-content">
+      <span class="auth-brand-badge">Nouveau membre</span>
+      <h1>Rejoignez HôtelFacile Smart</h1>
+      <p>Créez votre compte en quelques secondes et commencez à réserver des hôtels d'exception partout au Maroc.</p>
+      <ul class="auth-features">
+        <li>✔ Compte gratuit</li>
+        <li>✔ Offres exclusives</li>
+        <li>✔ Gestion de vos réservations</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="auth-card-wrap">
+    <div class="auth-card">
+      <div class="auth-card-header">
+        <h2>Créer un compte</h2>
+        <p class="auth-subtitle">Inscription client — réservez en toute simplicité</p>
+      </div>
+
+      <form id="registerForm" class="auth-form">
+        <div class="auth-form-row">
+          <div class="auth-field">
+            <label for="nom">Nom</label>
+            <input type="text" id="nom" placeholder="Votre nom" required autocomplete="family-name">
+          </div>
+          <div class="auth-field">
+            <label for="prenom">Prénom</label>
+            <input type="text" id="prenom" placeholder="Votre prénom" required autocomplete="given-name">
+          </div>
+        </div>
+        <div class="auth-field">
+          <label for="email">Adresse email</label>
+          <input type="email" id="email" placeholder="exemple@email.com" required autocomplete="email">
+        </div>
+        <div class="auth-field">
+          <label for="password">Mot de passe</label>
+          <input type="password" id="password" placeholder="Minimum 6 caractères" required autocomplete="new-password" minlength="6">
+        </div>
+        <button type="submit" class="btn-primary auth-submit">S'inscrire</button>
+      </form>
+
+      <div class="auth-divider"><span>ou</span></div>
+      <div id="googleSignInBtn" class="auth-google-btn-wrap"></div>
+
+      <p id="message" class="auth-message" role="alert"></p>
+
+      <div class="auth-links">
+        <p>Vous avez déjà un compte ? <a href="login.html">Se connecter</a></p>
+        <p><a href="../../Proprietaire/html/register.html">Vous êtes propriétaire d'hôtel ? →</a></p>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="../../Commun/runtimeConfig.js"></script>
+<script src="../../Commun/authHelpers.js"></script>
+<script src="../js/register.js"></script>
+<script src="../../Commun/google-config.js"></script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="../../Commun/googleAuth.js"></script>
+<script src="../../Commun/appBrand.js" data-base="../../"></script>
+</body>
+</html>

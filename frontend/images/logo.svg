@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="HotelFacile Smart">
+  <defs>
+    <linearGradient id="hf-bg" x1="64" y1="48" x2="448" y2="464" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#2F64EA"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="108" fill="url(#hf-bg)"/>
+  <path fill="#FFFFFF" d="M256 108 132 200v188h88V272h72v116h88V200L256 108z"/>
+  <rect x="228" y="292" width="56" height="96" rx="6" fill="#2F64EA"/>
+  <rect x="204" y="228" width="28" height="28" rx="4" fill="#2F64EA"/>
+  <rect x="280" y="228" width="28" height="28" rx="4" fill="#2F64EA"/>
+  <circle cx="372" cy="140" r="52" fill="#FBBF24"/>
+  <path fill="#FFFFFF" d="M372 108l9 27h29l-23 17 9 27-24-18-24 18 9-27-23-17h29z"/>
+</svg>

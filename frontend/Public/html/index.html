@@ -1,0 +1,261 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HôtelFacile Smart — Réservation d'hôtels au Maroc</title>
+  <link rel="preload" href="../../images/hero.jpg" as="image" fetchpriority="high">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=optional" rel="stylesheet">
+  <link rel="icon" href="../../images/logo.svg" type="image/svg+xml">
+  <script src="../../Commun/homeBoot.js"></script>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body class="home-page">
+<header class="header">
+  <a href="index.html" class="logo app-brand logo--upgraded" aria-label="HôtelFacile Smart — Accueil"><span class="app-logo__mark" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><defs><linearGradient id="hf-logo-bg" x1="64" y1="48" x2="448" y2="464" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#3B82F6"/><stop offset="100%" stop-color="#2F64EA"/></linearGradient></defs><rect width="512" height="512" rx="108" fill="url(#hf-logo-bg)"/><path fill="#FFFFFF" d="M256 108 132 200v188h88V272h72v116h88V200L256 108z"/><rect x="228" y="292" width="56" height="96" rx="6" fill="#2F64EA"/><rect x="204" y="228" width="28" height="28" rx="4" fill="#2F64EA"/><rect x="280" y="228" width="28" height="28" rx="4" fill="#2F64EA"/><circle cx="372" cy="140" r="52" fill="#FBBF24"/><path fill="#FFFFFF" d="M372 108l9 27h29l-23 17 9 27-24-18-24 18 9-27-23-17h29z"/></svg></span><img class="app-logo__img app-logo__img--fallback" src="../../images/logo.svg" alt="" width="56" height="56" decoding="async"><span class="app-logo__text"><span class="app-logo__name">HôtelFacile <em>Smart</em></span></span></a>
+  <nav class="nav">
+    <a href="../../Proprietaire/html/register.html">Ajouter mon hôtel</a>
+    <a href="#destinations">Destinations</a>
+    <a href="#why-us">À propos</a>
+    <a href="#footer">Contact</a>
+    <a href="../../Client/html/login.html" class="btn-login">Se connecter</a>
+    <a href="../../Client/html/register.html" class="btn-primary">S'inscrire</a>
+  </nav>
+</header>
+<section class="hero home-hero">
+  <div class="hero-bg" aria-hidden="true">
+    <img src="../../images/hero.jpg" alt="" fetchpriority="high" decoding="sync">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-badge">Plateforme n°1 au Maroc</span>
+    <h1>Trouvez l'hôtel parfait pour votre séjour</h1>
+    <p class="hero-lead">Des milliers de chambres vérifiées, des tarifs transparents et une réservation en quelques clics.</p>
+
+    <div id="search" class="search-box home-search">
+      <div class="search-field">
+        <label for="ville">Destination</label>
+        <select id="ville" required>
+          <option value="">Choisir une ville</option>
+          <option>Marrakech</option>
+          <option>Rabat</option>
+          <option>Casablanca</option>
+          <option>Tanger</option>
+          <option>Fès</option>
+          <option>Agadir</option>
+          <option>Oujda</option>
+          <option>Meknès</option>
+        </select>
+      </div>
+      <div class="search-field">
+        <label for="personnes">Voyageurs</label>
+        <input type="number" id="personnes" placeholder="Nombre" min="1">
+      </div>
+      <div class="search-field">
+        <label for="type">Type de chambre</label>
+        <select id="type">
+          <option value="tous">Tous les types</option>
+          <option value="economique">Économique</option>
+          <option value="standard">Standard</option>
+          <option value="luxe">Luxe</option>
+          <option value="suite">Suite</option>
+        </select>
+      </div>
+      <div class="search-field">
+        <label for="budget">Budget max (DH)</label>
+        <input type="number" id="budget" placeholder="Ex. 800" min="0">
+      </div>
+      <button type="button" class="btn-primary home-search-btn" onclick="rechercher()">
+        Rechercher
+      </button>
+    </div>
+
+    <div class="hero-quick-villes">
+      <span class="hero-quick-label">Tendances</span>
+      <div class="hero-quick-chips">
+        <button type="button" class="hero-quick-chip" data-ville="Marrakech">Marrakech</button>
+        <button type="button" class="hero-quick-chip" data-ville="Casablanca">Casablanca</button>
+        <button type="button" class="hero-quick-chip" data-ville="Agadir">Agadir</button>
+        <button type="button" class="hero-quick-chip" data-ville="Fès">Fès</button>
+        <button type="button" class="hero-quick-chip" data-ville="Tanger">Tanger</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="hero-scroll-bridge" id="heroScrollHint" aria-hidden="false">
+  <div class="hero-scroll-hint">
+    <span class="hero-scroll-hint__label">Descendez</span>
+    <span class="hero-scroll-hint__mouse" aria-hidden="true">
+      <svg viewBox="0 0 24 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="3" y="1" width="18" height="30" rx="9" stroke="currentColor" stroke-width="1.5"/>
+        <line class="hero-scroll-hint__wheel" x1="12" y1="8" x2="12" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </span>
+    <span class="hero-scroll-hint__chevrons" aria-hidden="true">
+      <span></span>
+      <span></span>
+    </span>
+  </div>
+</div>
+
+<section id="hotels" class="section home-section">
+  <div class="section-head">
+    <span class="section-tag">Sélection premium</span>
+    <h2>Hôtels populaires</h2>
+    <p>Les établissements préférés de nos voyageurs cette saison.</p>
+  </div>
+  <div id="hotelList" class="grid home-grid"></div>
+</section>
+
+<section id="destinations" class="section home-section home-section-alt">
+  <div class="section-head">
+    <span class="section-tag">Explorer le Maroc</span>
+    <h2>Destinations populaires</h2>
+    <p>Découvrez les villes les plus demandées par nos clients.</p>
+  </div>
+  <div id="destinationsList" class="grid home-grid"></div>
+  <script>
+  try {
+    var _hfH = sessionStorage.getItem("hf_home_hotels_html");
+    var _hfD = sessionStorage.getItem("hf_home_dest_html");
+    if (_hfH) { var _el = document.getElementById("hotelList"); if (_el) _el.innerHTML = _hfH; }
+    if (_hfD) { var _el2 = document.getElementById("destinationsList"); if (_el2) _el2.innerHTML = _hfD; }
+  } catch (e) {}
+  </script>
+</section>
+
+<section id="why-us" class="section home-section">
+  <div class="section-head">
+    <span class="section-tag">Nos engagements</span>
+    <h2>Pourquoi HôtelFacile Smart ?</h2>
+    <p>Une expérience pensée pour les voyageurs exigeants.</p>
+  </div>
+  <div class="home-stats">
+    <div><strong>8</strong><span>Villes</span></div>
+    <div><strong>100%</strong><span>Sécurisé</span></div>
+    <div><strong>24/7</strong><span>Support</span></div>
+  </div>
+  <div class="grid home-features">
+    <article class="home-feature-card">
+      <span class="home-feature-icon">🏨</span>
+      <h3>Hôtels vérifiés</h3>
+      <p>Chaque établissement est contrôlé par notre équipe avant publication.</p>
+    </article>
+    <article class="home-feature-card">
+      <span class="home-feature-icon">💰</span>
+      <h3>Meilleurs tarifs</h3>
+      <p>Comparez les prix et réservez au meilleur rapport qualité-prix.</p>
+    </article>
+    <article class="home-feature-card">
+      <span class="home-feature-icon">🔒</span>
+      <h3>Réservation sécurisée</h3>
+      <p>Paiement protégé et confirmation instantanée de votre séjour.</p>
+    </article>
+    <article class="home-feature-card">
+      <span class="home-feature-icon">📱</span>
+      <h3>Simple et rapide</h3>
+      <p>Recherche intuitive, suivi des réservations et support réactif.</p>
+    </article>
+  </div>
+</section>
+
+<section id="proprietaires" class="section home-section home-owner-section">
+  <div class="home-owner-panel">
+    <div class="home-owner-content">
+      <span class="home-owner-tag">Espace propriétaire</span>
+      <h2>Gérez votre hôtel, recevez plus de réservations</h2>
+      <p class="home-owner-lead">
+        Rejoignez HôtelFacile Smart et mettez votre établissement en ligne auprès de voyageurs partout au Maroc.
+      </p>
+      <div class="home-owner-actions">
+        <a href="../../Proprietaire/html/register.html" class="home-owner-btn home-owner-btn-primary">Inscrire mon hôtel</a>
+        <a href="../../Proprietaire/html/login.html" class="home-owner-btn home-owner-btn-outline">Accéder à mon espace</a>
+      </div>
+    </div>
+    <ul class="home-owner-benefits">
+      <li>
+        <span class="home-owner-benefit-icon" aria-hidden="true">🏨</span>
+        <div>
+          <strong>Publiez votre établissement</strong>
+          <p>Créez votre fiche, ajoutez vos photos et décrivez vos chambres en quelques minutes.</p>
+        </div>
+      </li>
+      <li>
+        <span class="home-owner-benefit-icon" aria-hidden="true">📅</span>
+        <div>
+          <strong>Gérez vos réservations</strong>
+          <p>Recevez les demandes, validez ou refusez et suivez chaque séjour depuis votre tableau de bord.</p>
+        </div>
+      </li>
+      <li>
+        <span class="home-owner-benefit-icon" aria-hidden="true">📈</span>
+        <div>
+          <strong>Gagnez en visibilité</strong>
+          <p>Profitez d'une plateforme dédiée au tourisme marocain pour attirer de nouveaux clients.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="cta home-cta">
+  <div class="home-cta-inner">
+    <h2>Prêt pour votre prochain voyage ?</h2>
+    <p>Réservez dès maintenant et profitez d'un séjour inoubliable au Maroc.</p>
+    <button type="button" class="btn-primary home-cta-btn" onclick="document.getElementById('search').scrollIntoView({behavior:'smooth'})">
+      Commencer la recherche
+    </button>
+  </div>
+</section>
+<footer id="footer" class="footer">
+  <div class="footer-container">
+    <div class="footer-section">
+      <h3>🏨 HôtelFacile Smart</h3>
+      <p>Votre partenaire de confiance pour des séjours inoubliables. Réservez facilement, rapidement et intelligemment.</p>
+    </div>
+    <div class="footer-section">
+      <h4>Liens rapides</h4>
+      <ul class="footer-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="#search">Rechercher</a></li>
+        <li><a href="#destinations">Destinations</a></li>
+        <li><a href="../../Client/html/login.html">Connexion</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>Contact</h4>
+      <p>📍 123 Avenue, 12000 Marrakech</p>
+      <p>📞 +212 6 23 45 67 89</p>
+      <p>✉️ contact@hotelfacilesmart.com</p>
+    </div>
+    <div class="footer-section">
+      <h4>Suivez-nous</h4>
+      <p>Offres exclusives et conseils voyage.</p>
+      <div class="social-icons">
+        <a href="#" aria-label="Facebook">📘</a>
+        <a href="#" aria-label="Instagram">📷</a>
+        <a href="#" aria-label="LinkedIn">🔗</a>
+        <a href="#" aria-label="WhatsApp">💬</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 HôtelFacile Smart. Tous droits réservés.</p>
+  </div>
+</footer>
+
+<script src="../../Commun/runtimeConfig.js"></script>
+<script src="../../Commun/paths.js"></script>
+<script src="../../Commun/appBrand.js" data-base="../../"></script>
+<script src="../../Commun/villes-images.js"></script>
+<script src="../../Commun/hotelImageUrl.js"></script>
+<script src="../../Commun/homeData.js"></script>
+<script src="../../Commun/homePage.js"></script>
+<script src="../js/index.js"></script>
+</body>
+</html>

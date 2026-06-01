@@ -1,0 +1,219 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ajouter un hôtel - HôtelFacile Smart</title>
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../../css/styleAjouter.css?v=20260528">
+  <link rel="icon" href="../../images/logo.svg" type="image/svg+xml">
+</head>
+<body class="hotel-ajouter-page" data-auth-role="proprietaire">
+
+  <!-- ==================== HEADER ==================== -->
+  <header>
+    <div class="logo logo--upgraded"><a href="Dashboard.html" class="app-brand" aria-label="HôtelFacile Smart — Accueil"><span class="app-logo__mark" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><defs><linearGradient id="hf-logo-bg" x1="64" y1="48" x2="448" y2="464" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#3B82F6"/><stop offset="100%" stop-color="#2F64EA"/></linearGradient></defs><rect width="512" height="512" rx="108" fill="url(#hf-logo-bg)"/><path fill="#FFFFFF" d="M256 108 132 200v188h88V272h72v116h88V200L256 108z"/><rect x="228" y="292" width="56" height="96" rx="6" fill="#2F64EA"/><rect x="204" y="228" width="28" height="28" rx="4" fill="#2F64EA"/><rect x="280" y="228" width="28" height="28" rx="4" fill="#2F64EA"/><circle cx="372" cy="140" r="52" fill="#FBBF24"/><path fill="#FFFFFF" d="M372 108l9 27h29l-23 17 9 27-24-18-24 18 9-27-23-17h29z"/></svg></span><img class="app-logo__img app-logo__img--fallback" src="../../images/logo.svg" alt="" width="56" height="56" decoding="async"><span class="app-logo__text"><span class="app-logo__name">HôtelFacile <em>Smart</em></span></span></a></div>
+    <nav>
+      <ul>
+        <li><a href="Dashboard.html">Accueil</a></li>
+        <li><a href="hotel.html">Mes hôtels</a></li>
+        <li><a href="reservationDetail.html">Mes réservations</a></li>
+        <li><a href="#footer">À propos</a></li>
+      </ul>
+      <div class="header-notif-group">
+        <div data-notifications-bell></div>
+        <div data-profile-menu></div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="app-back-bar app-back-bar--owner">
+    <button type="button" class="app-back-btn app-back-btn--owner" data-owner-back data-owner-back-fallback="Dashboard.html">
+      <span class="app-back-btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19 5 12 12 5"/></svg></span>
+      Retour
+    </button>
+  </div>
+
+  <!-- ==================== CONTENU PRINCIPAL ==================== -->
+  <main>
+    <div>
+      <h2>Ajouter un <span class="highlight">nouvel hôtel</span></h2>
+      <p>Renseignez les informations de votre établissement et ajoutez vos chambres.</p>
+    </div>
+
+    <form id="hotelForm">
+      <!-- SECTION INFORMATIONS ÉTABLISSEMENT -->
+      <div>
+        <h3>Informations de l'établissement</h3>
+
+        <div>
+          <label>NOM DE L'HÔTEL *</label>
+          <input type="text" id="nom" placeholder="Ex: Le Grand Hôtel" required>
+        </div>
+
+        <div>
+          <label>VILLE *</label>
+          <select id="ville" required>
+            <option value="">-- Choisir une ville --</option>
+            <option value="Marrakech">Marrakech</option>
+            <option value="Rabat">Rabat</option>
+            <option value="Casablanca">Casablanca</option>
+            <option value="Tanger">Tanger</option>
+            <option value="Fès">Fès</option>
+            <option value="Agadir">Agadir</option>
+            <option value="Oujda">Oujda</option>
+            <option value="Meknès">Meknès</option>
+          </select>
+        </div>
+
+        <div>
+          <label>ADRESSE COMPLÈTE *</label>
+          <input type="text" id="adresse" placeholder="Ex: 123 Avenue des Champs-Élysées" required>
+        </div>
+
+        <div>
+          <label>LOCALISATION SUR LA CARTE</label>
+          <p class="field-hint">Cliquez sur la carte pour placer l'épingle, ou utilisez « Ma position » si vous êtes sur place.</p>
+          <div class="hotel-add-map-toolbar">
+            <button type="button" class="hotel-add-map-btn" id="mapLocateBtn">📍 Ma position</button>
+          </div>
+          <div id="hotelAddMap" class="hotel-add-map" aria-label="Carte de localisation"></div>
+        </div>
+
+        <div>
+          <label>DESCRIPTION</label>
+          <textarea id="description" placeholder="Décrivez votre établissement..."></textarea>
+        </div>
+
+        <div class="hotel-images-field">
+          <label>PHOTOS</label>
+          <p class="field-hint hotel-add-photos-hint">La première photo sera la page principale de votre hôtel. JPG, PNG, WebP · 10 photos maximum.</p>
+          <label class="hotel-add-upload-zone" for="hotelPhotos">
+            <span class="hotel-add-upload-zone__icon" aria-hidden="true">📷</span>
+            <span class="hotel-add-upload-zone__title">Cliquez pour ajouter des photos</span>
+            <span class="hotel-add-upload-zone__meta">Glissez-déposez ou parcourez vos fichiers</span>
+          </label>
+          <input type="file" id="hotelPhotos" class="hotel-add-upload-input" accept="image/jpeg,image/png,image/webp,image/gif" multiple>
+          <div id="hotelPhotosPreview" class="hotel-add-photos-preview" aria-live="polite"></div>
+        </div>
+      </div>
+
+      <!-- SECTION CHAMBRES -->
+      <div>
+        <h3>Ajouter des chambres</h3>
+        <div id="chambresContainer" class="hotel-add-chambres-list" aria-live="polite"></div>
+        <button type="button" id="ajouterChambreBtn">+ Ajouter une chambre</button>
+        <div id="chambresCount" class="chambres-count">0 chambre</div>
+      </div>
+
+      <!-- BOUTONS FORMULAIRE -->
+      <div>
+        <button type="submit" id="createHotelBtn" class="hotel-add-submit-btn">Créer l'hôtel</button>
+      </div>
+    </form>
+  </main>
+
+  <div id="addHotelChambreModal" class="modal owner-modal" aria-hidden="true">
+    <div class="modal-content modal-content--wide owner-modal__panel owner-modal__panel--chambre">
+      <div class="owner-modal__head">
+        <div class="owner-modal__head-text">
+          <p class="owner-modal__eyebrow">Nouvel hôtel</p>
+          <h2 id="addHotelChambreModalTitle">Ajouter une chambre</h2>
+        </div>
+        <button type="button" class="owner-modal__close" id="addHotelChambreModalClose" aria-label="Fermer">×</button>
+      </div>
+      <div class="owner-modal__body">
+        <section class="owner-form-section">
+          <h3 class="owner-form-section__title"><span aria-hidden="true">🛏</span> Caractéristiques</h3>
+          <div class="owner-form-grid">
+            <div class="owner-form-field owner-form-field--full">
+              <label class="owner-form-label" for="addHotelChType">Type de chambre</label>
+              <select id="addHotelChType" class="owner-form-input">
+                <option value="economique">Économique</option>
+                <option value="standard">Standard</option>
+                <option value="superieur">Supérieur</option>
+                <option value="deluxe">Deluxe</option>
+                <option value="suite">Suite</option>
+                <option value="familiale">Familiale</option>
+              </select>
+            </div>
+            <div class="owner-form-field">
+              <label class="owner-form-label" for="addHotelChPrix">Prix (DH / nuit)</label>
+              <input id="addHotelChPrix" class="owner-form-input" type="number" min="0" step="1" placeholder="Ex. 450">
+            </div>
+            <div class="owner-form-field">
+              <label class="owner-form-label" for="addHotelChCapacite">Capacité</label>
+              <input id="addHotelChCapacite" class="owner-form-input" type="number" min="1" step="1" placeholder="Ex. 2">
+            </div>
+          </div>
+        </section>
+        <section class="owner-form-section owner-form-section--photos">
+          <h3 class="owner-form-section__title"><span aria-hidden="true">🖼</span> Photos</h3>
+          <p class="owner-modal-hint">La première photo servira de vignette. JPG, PNG, WebP · plusieurs fichiers possibles.</p>
+          <label class="owner-chambre-upload-zone" for="addHotelChPhotos">
+            <span class="owner-chambre-upload-zone__icon" aria-hidden="true">📷</span>
+            <span class="owner-chambre-upload-zone__title">Cliquez pour ajouter des photos</span>
+            <span class="owner-chambre-upload-zone__meta">JPG, PNG, WebP · plusieurs fichiers possibles</span>
+          </label>
+          <input type="file" id="addHotelChPhotos" class="owner-chambre-upload-input" accept="image/jpeg,image/png,image/webp,image/gif" multiple>
+          <div id="addHotelChPendingGrid" class="owner-chambre-gallery owner-chambre-gallery--pending"></div>
+        </section>
+      </div>
+      <div class="owner-modal__actions owner-modal__actions--split">
+        <button type="button" class="owner-btn owner-btn-outline" id="addHotelChambreModalCancel">Annuler</button>
+        <button type="button" class="owner-btn owner-btn-primary" id="addHotelChambreModalSave">Ajouter</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer id="footer">
+    <div>
+      <div>
+        <h3>🏨 HôtelFacile Smart</h3>
+        <p>La plateforme qui connecte les voyageurs aux meilleurs hôtels du Maroc.</p>
+      </div>
+      <div>
+        <h4>Liens rapides</h4>
+        <ul>
+          <li><a href="Dashboard.html">Accueil</a></li>
+          <li><a href="hotel.html">Mes hôtels</a></li>
+          <li><a href="reservationDetail.html">Réservations</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p>📍 123 Avenue<br>12000 Marrakech, Maroc</p>
+        <p>📞 +212 6 23 45 67 89</p>
+        <p>✉️ contact@hotelfacilesmart.com</p>
+      </div>
+      <div>
+        <h4>Suivez-nous</h4>
+        <p>Rejoignez notre communauté pour découvrir nos offres exclusives.</p>
+        <div>
+          <a href="#">📘</a>
+          <a href="#">📷</a>
+          <a href="#">🔗</a>
+          <a href="#">💬</a>
+        </div>
+      </div>
+    </div>
+    <div>
+      <p>&copy; 2025 HôtelFacile Smart. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+<script>
+function goToReservations() { window.location.href = "reservationDetail.html"; }
+</script>
+<script src="../js/ownerBack.js"></script>
+<script src="../../Commun/runtimeConfig.js"></script>
+<script src="../../Commun/paths.js"></script>
+<script src="../../Commun/appBrand.js" data-base="../../"></script>
+<script src="../../Commun/hotelImageUrl.js"></script>
+<script src="../../Commun/hotelMap.js"></script>
+<script src="../js/hotelAjouter.js?v=20260528"></script>
+<script src="../../Commun/notificationsBell.js"></script>
+<script src="../../Commun/profileMenu.js"></script>
+</body>
+</html>

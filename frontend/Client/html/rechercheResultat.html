@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Résultats de recherche — HôtelFacile Smart</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="icon" href="../../images/logo.svg" type="image/svg+xml">
+</head>
+<body class="search-results-page" data-auth-role="client">
+
+<header class="header">
+  <a href="Dashboard.html" class="logo app-brand logo--upgraded" aria-label="HôtelFacile Smart — Accueil"><span class="app-logo__mark" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><defs><linearGradient id="hf-logo-bg" x1="64" y1="48" x2="448" y2="464" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#3B82F6"/><stop offset="100%" stop-color="#2F64EA"/></linearGradient></defs><rect width="512" height="512" rx="108" fill="url(#hf-logo-bg)"/><path fill="#FFFFFF" d="M256 108 132 200v188h88V272h72v116h88V200L256 108z"/><rect x="228" y="292" width="56" height="96" rx="6" fill="#2F64EA"/><rect x="204" y="228" width="28" height="28" rx="4" fill="#2F64EA"/><rect x="280" y="228" width="28" height="28" rx="4" fill="#2F64EA"/><circle cx="372" cy="140" r="52" fill="#FBBF24"/><path fill="#FFFFFF" d="M372 108l9 27h29l-23 17 9 27-24-18-24 18 9-27-23-17h29z"/></svg></span><img class="app-logo__img app-logo__img--fallback" src="../../images/logo.svg" alt="" width="56" height="56" decoding="async"><span class="app-logo__text"><span class="app-logo__name">HôtelFacile <em>Smart</em></span></span></a>
+  <nav class="nav">
+    <a href="Dashboard.html#hotels">Hôtels</a>
+    <a href="Dashboard.html#destinations">Destinations</a>
+    <a href="Dashboard.html#why-us">À propos</a>
+    <a href="Dashboard.html#footer">Contact</a>
+    <button type="button" class="btn-nav-client btn-nav-client--primary" onclick="goReservations()">Mes réservations</button>
+    <button type="button" class="btn-nav-client btn-nav-client--ghost" onclick="goFavoris()">Mes favoris</button>
+    <div data-notifications-bell></div>
+    <div data-profile-menu></div>
+  </nav>
+</header>
+
+<div class="app-back-bar">
+  <button type="button" class="app-back-btn" onclick="if(window.history.length>1){history.back();}else{window.location.href='Dashboard.html';}">
+    <span class="app-back-btn-icon" aria-hidden="true">←</span>
+    Retour
+  </button>
+</div>
+
+<main class="search-results-main">
+  <section class="search-results-head card">
+    <span class="section-tag">Recherche</span>
+    <h1>Résultats pour votre séjour</h1>
+
+    <div id="search" class="search-box home-search search-box--results">
+      <div class="search-field">
+        <label for="ville">Destination</label>
+        <select id="ville" required>
+          <option value="">Choisir une ville</option>
+          <option>Marrakech</option>
+          <option>Rabat</option>
+          <option>Casablanca</option>
+          <option>Tanger</option>
+          <option>Fès</option>
+          <option>Agadir</option>
+          <option>Oujda</option>
+          <option>Meknès</option>
+        </select>
+      </div>
+      <div class="search-field">
+        <label for="personnes">Voyageurs</label>
+        <input type="number" id="personnes" placeholder="Nombre" min="1">
+      </div>
+      <div class="search-field">
+        <label for="type">Type de chambre</label>
+        <select id="type">
+          <option value="tous">Tous les types</option>
+          <option value="economique">Économique</option>
+          <option value="standard">Standard</option>
+          <option value="luxe">Luxe</option>
+          <option value="suite">Suite</option>
+        </select>
+      </div>
+      <div class="search-field">
+        <label for="budget">Budget max (DH)</label>
+        <input type="number" id="budget" placeholder="Ex. 800" min="0">
+      </div>
+      <button type="button" class="btn-primary home-search-btn" onclick="rechercher()">Rechercher</button>
+    </div>
+  </section>
+
+  <div id="resultats" class="search-results-list">
+    <p class="search-results-loading">Chargement des hôtels…</p>
+  </div>
+</main>
+
+<footer id="footer" class="footer">
+  <div class="footer-container">
+    <div class="footer-section">
+      <h3>🏨 HôtelFacile Smart</h3>
+      <p>Votre partenaire de confiance pour des séjours inoubliables. Réservez facilement, rapidement et intelligemment.</p>
+    </div>
+    <div class="footer-section">
+      <h4>Liens rapides</h4>
+      <ul class="footer-links">
+        <li><a href="Dashboard.html">Accueil</a></li>
+        <li><a href="Dashboard.html#search">Rechercher</a></li>
+        <li><a href="reservationDetail.html">Mes réservations</a></li>
+        <li><a href="Dashboard.html#destinations">Destinations</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>Contact</h4>
+      <p>📍 123 Avenue, 12000 Marrakech</p>
+      <p>📞 +212 6 23 45 67 89</p>
+      <p>✉️ contact@hotelfacilesmart.com</p>
+    </div>
+    <div class="footer-section">
+      <h4>Suivez-nous</h4>
+      <p>Offres exclusives et conseils voyage.</p>
+      <div class="social-icons">
+        <a href="#" aria-label="Facebook">📘</a>
+        <a href="#" aria-label="Instagram">📷</a>
+        <a href="#" aria-label="LinkedIn">🔗</a>
+        <a href="#" aria-label="WhatsApp">💬</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 HôtelFacile Smart. Tous droits réservés.</p>
+  </div>
+</footer>
+
+<script src="../../Commun/runtimeConfig.js"></script>
+<script src="../../Commun/paths.js"></script>
+<script src="../../Commun/appBrand.js" data-base="../../"></script>
+<script src="../../Commun/hotelImageUrl.js"></script>
+<script src="../../Commun/notificationsBell.js"></script>
+<script src="../../Commun/profileMenu.js"></script>
+<script src="../js/favorisClient.js"></script>
+<script src="../js/rechercheResultat.js"></script>
+</body>
+</html>

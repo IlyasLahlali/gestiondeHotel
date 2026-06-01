@@ -1,0 +1,181 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chambres - HôtelFacile Smart</title>
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="icon" href="../../images/logo.svg" type="image/svg+xml">
+</head>
+<body class="proprietaire-page proprietaire-chambres-page" data-auth-role="proprietaire">
+
+<header class="dashboard-header">
+  <a href="Dashboard.html" class="logo app-brand logo--upgraded" aria-label="HôtelFacile Smart — Accueil"><span class="app-logo__mark" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><defs><linearGradient id="hf-logo-bg" x1="64" y1="48" x2="448" y2="464" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#3B82F6"/><stop offset="100%" stop-color="#2F64EA"/></linearGradient></defs><rect width="512" height="512" rx="108" fill="url(#hf-logo-bg)"/><path fill="#FFFFFF" d="M256 108 132 200v188h88V272h72v116h88V200L256 108z"/><rect x="228" y="292" width="56" height="96" rx="6" fill="#2F64EA"/><rect x="204" y="228" width="28" height="28" rx="4" fill="#2F64EA"/><rect x="280" y="228" width="28" height="28" rx="4" fill="#2F64EA"/><circle cx="372" cy="140" r="52" fill="#FBBF24"/><path fill="#FFFFFF" d="M372 108l9 27h29l-23 17 9 27-24-18-24 18 9-27-23-17h29z"/></svg></span><img class="app-logo__img app-logo__img--fallback" src="../../images/logo.svg" alt="" width="56" height="56" decoding="async"><span class="app-logo__text"><span class="app-logo__name">HôtelFacile <em>Smart</em></span></span></a>
+  <div class="header-actions owner-hotel-detail-header__actions">
+    <button type="button" class="owner-hotel-detail-header__link" onclick="window.location.href='Dashboard.html'">Accueil</button>
+    <button type="button" class="owner-hotel-detail-header__link" onclick="OwnerCommon.goToHotelsList()">Mes hôtels</button>
+    <button type="button" class="owner-hotel-detail-header__link" onclick="OwnerCommon.goToReservations()">Réservations</button>
+    <button type="button" class="owner-hotel-detail-header__link" onclick="scrollToFooterContact()">Contact</button>
+    <div data-notifications-bell></div>
+    <div data-profile-menu></div>
+  </div>
+</header>
+
+<div class="app-back-bar app-back-bar--owner">
+  <button type="button" class="app-back-btn app-back-btn--owner" data-owner-back id="ownerChambreBackBtn" data-owner-back-fallback="hotel.html">
+    <span class="app-back-btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19 5 12 12 5"/></svg></span>
+    Retour
+  </button>
+</div>
+
+<main class="owner-main owner-chambres-main">
+  <section class="card admin-section owner-panel owner-chambres-panel">
+    <div class="admin-list-header owner-chambres-panel__head">
+      <div class="owner-chambres-panel__intro">
+        <span class="owner-chambres-tag">Gestion des chambres</span>
+        <h2 class="admin-panel-title owner-chambres-panel__title" id="hotelTitle">Chargement…</h2>
+        <p class="owner-chambres-subtitle" id="hotelSubtitle">Chambres</p>
+      </div>
+      <button type="button" class="owner-btn owner-chambres-add-btn" onclick="openAddChambreModal()"><span class="owner-chambres-add-btn__plus" aria-hidden="true">+</span> Ajouter une chambre</button>
+    </div>
+
+    <div class="owner-chambres-filters" id="chambresFiltersSection" hidden aria-label="Filtrer les chambres">
+      <p class="owner-chambres-filters__title">Filtrer les chambres</p>
+      <div class="owner-chambres-filters__bar">
+        <div class="owner-chambres-filters__field owner-chambres-filters__field--type">
+          <label class="owner-chambres-filters__label" for="chFilterType">TYPE</label>
+          <select id="chFilterType" class="owner-chambres-filters__input owner-chambres-filters__select">
+            <option value="">Tous</option>
+          </select>
+        </div>
+        <div class="owner-chambres-filters__field owner-chambres-filters__field--cap">
+          <label class="owner-chambres-filters__label" for="chFilterCapacite">CAPACITÉ</label>
+          <input id="chFilterCapacite" class="owner-chambres-filters__input" type="number" min="1" step="1" placeholder="Ex. 2" inputmode="numeric">
+        </div>
+      </div>
+    </div>
+
+    <p class="admin-count owner-chambres-count" id="chFilterMeta" aria-live="polite"></p>
+    <div id="chambresList" class="chambres-grid owner-chambres-grid"></div>
+  </section>
+</main>
+
+<div id="editChambreModal" class="modal owner-modal">
+  <div class="modal-content modal-content--wide owner-modal__panel owner-modal__panel--chambre">
+    <div class="owner-modal__head">
+      <div class="owner-modal__head-text">
+        <p class="owner-modal__eyebrow">Gestion des chambres</p>
+        <h2 id="chambreModalTitle">Modifier la chambre</h2>
+      </div>
+      <button type="button" class="owner-modal__close" onclick="closeChambreModal()" aria-label="Fermer">×</button>
+    </div>
+    <div class="owner-modal__body">
+      <section class="owner-form-section">
+        <h3 class="owner-form-section__title"><span aria-hidden="true">🛏</span> Caractéristiques</h3>
+        <div class="owner-form-grid">
+          <div class="owner-form-field owner-form-field--full">
+            <label class="owner-form-label" for="chType">Type de chambre</label>
+            <select id="chType" class="owner-form-input">
+              <option value="economique">Économique</option>
+              <option value="standard">Standard</option>
+              <option value="deluxe">Deluxe</option>
+              <option value="suite">Suite</option>
+              <option value="familiale">Familiale</option>
+              <option value="luxe">Luxe</option>
+            </select>
+          </div>
+          <div class="owner-form-field">
+            <label class="owner-form-label" for="chPrix">Prix (DH / nuit)</label>
+            <input id="chPrix" class="owner-form-input" type="number" min="0" step="1" placeholder="Ex. 450">
+          </div>
+          <div class="owner-form-field">
+            <label class="owner-form-label" for="chCapacite">Capacité</label>
+            <input id="chCapacite" class="owner-form-input" type="number" min="1" step="1" placeholder="Ex. 2">
+          </div>
+        </div>
+      </section>
+
+      <section class="owner-form-section owner-form-section--photos">
+        <h3 class="owner-form-section__title"><span aria-hidden="true">🖼</span> Photos</h3>
+        <p class="owner-modal-hint">La première photo sert de vignette sur la fiche client. Les images choisies ci-dessous seront enregistrées avec le bouton « Enregistrer ».</p>
+
+        <label class="owner-chambre-upload-zone" for="chUploadPhotos">
+          <span class="owner-chambre-upload-zone__icon" aria-hidden="true">📷</span>
+          <span class="owner-chambre-upload-zone__title">Cliquez pour ajouter des photos</span>
+          <span class="owner-chambre-upload-zone__meta">JPG, PNG, WebP · plusieurs fichiers possibles</span>
+        </label>
+        <input type="file" id="chUploadPhotos" class="owner-chambre-upload-input" accept="image/jpeg,image/png,image/webp,image/gif" multiple>
+
+        <div id="chPendingGrid" class="owner-chambre-gallery owner-chambre-gallery--pending"></div>
+
+        <p class="owner-chambre-gallery-label">Photos actuelles</p>
+        <div id="chGalleryGrid" class="owner-chambre-gallery"></div>
+      </section>
+    </div>
+    <div class="owner-modal__actions owner-modal__actions--split">
+      <button type="button" class="owner-btn owner-btn-outline" onclick="closeChambreModal()">Annuler</button>
+      <button type="button" class="owner-btn owner-btn-primary" id="chambreSaveBtn" onclick="saveChambre()">Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<div id="deleteChambreModal" class="avis-modal-overlay" hidden aria-hidden="true">
+  <div class="avis-modal avis-modal--compact" role="dialog" aria-modal="true" aria-labelledby="deleteChambreTitle">
+    <div class="avis-modal-icon avis-modal-icon--danger" aria-hidden="true">🗑</div>
+    <h2 id="deleteChambreTitle">Supprimer cette chambre ?</h2>
+    <p class="avis-modal-subtitle avis-modal-subtitle--center" id="deleteChambreSubtitle">Cette action est définitive.</p>
+    <div class="avis-modal-footer avis-modal-footer--center">
+      <button type="button" class="avis-modal-btn avis-modal-btn--cancel" onclick="closeDeleteChambreModal()">Annuler</button>
+      <button type="button" class="avis-modal-btn avis-modal-btn--delete btn-danger" id="deleteChambreConfirmBtn" onclick="confirmDeleteChambre()">Supprimer</button>
+    </div>
+  </div>
+</div>
+
+<footer id="footer" class="footer">
+  <div class="footer-container">
+    <div class="footer-section">
+      <h3>🏨 HôtelFacile Smart</h3>
+      <p>La plateforme qui connecte les voyageurs aux meilleurs hôtels du Maroc.</p>
+    </div>
+    <div class="footer-section">
+      <h4>Liens rapides</h4>
+      <ul class="footer-links">
+        <li><a href="Dashboard.html">Accueil</a></li>
+        <li><a href="hotel.html">Mes hôtels</a></li>
+        <li><a href="reservationDetail.html">Réservations</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>Contact</h4>
+      <p>📍 123 Avenue<br>12000 Marrakech, Maroc</p>
+      <p>📞 +212 6 23 45 67 89</p>
+      <p>✉️ contact@hotelfacilesmart.com</p>
+    </div>
+    <div class="footer-section">
+      <h4>Suivez-nous</h4>
+      <p>Rejoignez notre communauté pour découvrir nos offres exclusives.</p>
+      <div class="social-icons">
+        <a href="#">📘</a>
+        <a href="#">📷</a>
+        <a href="#">🔗</a>
+        <a href="#">💬</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 HôtelFacile Smart. Tous droits réservés.</p>
+  </div>
+</footer>
+
+<script src="../../Commun/runtimeConfig.js"></script>
+<script src="../../Commun/paths.js"></script>
+<script src="../../Commun/appBrand.js" data-base="../../"></script>
+<script src="../../Commun/hotelImageUrl.js"></script>
+<script src="../../Commun/galleryLightbox.js"></script>
+<script src="../../Commun/notificationsBell.js"></script>
+<script src="../../Commun/profileMenu.js"></script>
+<script src="../js/ownerBack.js"></script>
+<script src="../js/proprietaireCommon.js"></script>
+<script src="../js/chambreDetail.js"></script>
+</body>
+</html>

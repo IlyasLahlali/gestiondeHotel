@@ -1,0 +1,1010 @@
+/* =========================
+   STYLE SPÉCIFIQUE POUR AJOUTER-HOTEL.HTML
+   COULEURS : Bleu #2F64EA | Jaune #FBBF24 | Blanc #FFFFFF | Gris foncé #1F2937 | Gris clair #E5E7EB
+   (Footer inchangé)
+========================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', 'Inter', system-ui, sans-serif;
+  background: #F8FAFC;
+  color: #1F2937;
+  line-height: 1.5;
+}
+
+.hotel-images-field {
+  margin-top: 1rem;
+}
+
+.hotel-add-photos-hint {
+  padding: 0.65rem 0.85rem;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #EFF6FF 0%, #FFFBEB 100%);
+  border-left: 3px solid #FBBF24;
+}
+
+.hotel-add-upload-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.hotel-add-upload-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 1.5rem 1rem;
+  margin-bottom: 0.85rem;
+  border: 2px dashed #DBEAFE;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #FFFFFF 0%, #EFF6FF 55%, #FFFBEB 100%);
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+.hotel-add-upload-zone:hover,
+.hotel-add-upload-zone:focus-within {
+  border-color: #FBBF24;
+  background: linear-gradient(180deg, #EFF6FF 0%, #FFFBEB 100%);
+  box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.18);
+  transform: translateY(-1px);
+}
+
+.hotel-add-upload-zone__icon {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  font-size: 1.45rem;
+  line-height: 1;
+  background: linear-gradient(135deg, #DBEAFE 0%, #FBBF24 100%);
+  border: 1px solid #2F64EA;
+}
+
+.hotel-add-upload-zone__title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #2F64EA;
+}
+
+.hotel-add-upload-zone__meta {
+  font-size: 0.82rem;
+  color: #64748B;
+}
+
+.hotel-add-photos-preview {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(108px, 1fr));
+  gap: 0.75rem;
+}
+
+.hotel-add-photos-preview:empty {
+  display: none;
+}
+
+.hotel-add-photos-preview__item {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid #DBEAFE;
+  box-shadow: 0 2px 10px rgba(47, 100, 234, 0.08);
+  background: #F8FAFC;
+}
+
+.hotel-add-photos-preview__item.is-cover {
+  border-color: #2F64EA;
+  box-shadow: 0 0 0 2px #FBBF24, 0 4px 14px rgba(47, 100, 234, 0.14);
+}
+
+.hotel-add-photos-preview__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hotel-add-photos-preview__badge {
+  position: absolute;
+  top: 0.4rem;
+  left: 0.4rem;
+  padding: 0.18rem 0.45rem;
+  border-radius: 999px;
+  background: #FBBF24;
+  color: #1F2937;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.hotel-add-photos-preview__remove {
+  position: absolute;
+  top: 0.35rem;
+  right: 0.35rem;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  color: #64748B;
+  font-size: 1.15rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.12);
+  transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.hotel-add-photos-preview__remove:hover,
+.hotel-add-photos-preview__remove:active,
+.hotel-add-photos-preview__remove.is-active {
+  background: #EF4444;
+  color: #FFFFFF;
+  transform: scale(1.05);
+}
+
+.field-hint {
+  font-size: 0.85rem;
+  color: #6B7280;
+  margin: 0.35rem 0 0.5rem;
+}
+
+.hotel-images-field .field-hint:not(.hotel-add-photos-hint) {
+  background: none;
+  border-left: none;
+  padding: 0;
+}
+
+/* ==================== HEADER ==================== */
+header {
+  background: #2F64EA;
+  padding: 16px 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+header .logo h1 {
+  color: #FFFFFF;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+}
+
+header nav ul {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+header nav ul li a {
+  color: #FFFFFF;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 15px;
+  transition: color 0.2s;
+}
+
+header nav ul li a:hover {
+  color: #FBBF24;
+}
+
+header nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+header nav .header-notif-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 8px;
+}
+
+/* ==================== SECTION BLEUE (fond) ==================== */
+main > div:first-child {
+  background: #2F64EA;
+  margin: 0.75rem -24px 0;
+  padding: 1.5rem 24px 60px;
+  border-radius: 24px;
+}
+
+main > div:first-child h2 {
+  font-size: 48px;
+  font-weight: 700;
+  color: #FFFFFF !important;
+  margin-bottom: 12px;
+}
+
+main > div:first-child p {
+  color: rgba(255, 255, 255, 0.8) !important;
+  font-size: 18px;
+  margin-bottom: 0;
+}
+
+/* Contenu principal (carte blanche) */
+main {
+  max-width: 900px;
+  margin: 0 auto 60px;
+  padding: 0 24px;
+}
+
+/* ==================== FORMULAIRE (carte blanche) ==================== */
+form {
+  background: #FFFFFF;
+  border-radius: 24px;
+  padding: 32px;
+  margin-top: -40px;
+  position: relative;
+  z-index: 10;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* Sections du formulaire */
+form > div {
+  margin-bottom: 32px;
+}
+
+form h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #2F64EA;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 3px solid #FBBF24;
+  display: inline-block;
+}
+
+/* Champs du formulaire */
+form > div > div {
+  margin-bottom: 20px;
+}
+
+form label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1F2937;
+  margin-bottom: 8px;
+}
+
+form input,
+form select,
+form textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid #E5E7EB;
+  border-radius: 12px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: all 0.2s;
+  background: #FFFFFF;
+  color: #1F2937;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+  outline: none;
+  border-color: #2F64EA;
+  box-shadow: 0 0 0 3px rgba(47, 100, 234, 0.1);
+}
+
+form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* ==================== CHAMBRES (liste + cartes) ==================== */
+#chambresContainer,
+.hotel-add-chambres-list {
+  margin-bottom: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+.hotel-add-chambres-empty {
+  margin: 0;
+  padding: 1rem 1.1rem;
+  border-radius: 14px;
+  background: #F8FAFC;
+  border: 1px dashed #CBD5E1;
+  color: #64748B;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.hotel-add-chambre-card {
+  display: grid;
+  grid-template-columns: 72px 1fr auto;
+  gap: 14px;
+  align-items: center;
+  background: #F8FAFC;
+  border: 1px solid #E5E7EB;
+  border-radius: 16px;
+  padding: 14px;
+}
+
+.hotel-add-chambre-card__thumb {
+  width: 72px;
+  height: 72px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #EFF6FF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.hotel-add-chambre-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hotel-add-chambre-card__placeholder {
+  font-size: 1.6rem;
+}
+
+.hotel-add-chambre-card__body {
+  min-width: 0;
+}
+
+.hotel-add-chambre-card__type {
+  display: block;
+  color: #2F64EA;
+  font-size: 0.98rem;
+  margin-bottom: 0.2rem;
+}
+
+.hotel-add-chambre-card__meta,
+.hotel-add-chambre-card__photos {
+  margin: 0;
+  font-size: 0.84rem;
+  color: #64748B;
+  line-height: 1.45;
+}
+
+.hotel-add-chambre-card__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hotel-add-chambre-card__btn {
+  border: none;
+  border-radius: 999px;
+  padding: 0.45rem 0.85rem;
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.15s;
+}
+
+.hotel-add-chambre-card__btn--edit {
+  background: #EFF6FF;
+  color: #2F64EA;
+}
+
+.hotel-add-chambre-card__btn--edit:hover {
+  background: #DBEAFE;
+}
+
+.hotel-add-chambre-card__btn--delete {
+  background: #FEE2E2;
+  color: #DC2626;
+}
+
+.hotel-add-chambre-card__btn--delete:hover {
+  background: #FECACA;
+}
+
+body.hotel-ajouter-page .owner-modal.show {
+  z-index: 12000;
+}
+
+body.hotel-ajouter-page.owner-modal-open {
+  overflow: hidden;
+}
+
+/* Modal chambre — bleu #2F64EA · jaune #FBBF24 */
+#addHotelChambreModal .owner-modal__panel--chambre {
+  border: 1px solid #DBEAFE;
+  box-shadow: 0 28px 80px rgba(47, 100, 234, 0.16), 0 8px 24px rgba(251, 191, 36, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+#addHotelChambreModal .owner-modal__panel--chambre::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #2F64EA 0%, #2F64EA 55%, #FBBF24 100%);
+  z-index: 3;
+}
+
+#addHotelChambreModal .owner-modal__head {
+  background: linear-gradient(180deg, #EFF6FF 0%, #FFFBEB 45%, #FFFFFF 100%);
+  padding: 1.4rem 1.6rem;
+  border-bottom: 1px solid #FBBF24;
+}
+
+#addHotelChambreModal .owner-modal__eyebrow {
+  display: inline-block;
+  padding: 0.22rem 0.65rem;
+  border-radius: 999px;
+  background: #FBBF24;
+  color: #2F64EA;
+  font-weight: 800;
+}
+
+#addHotelChambreModal .owner-modal__head h2 {
+  color: #2F64EA;
+  margin-top: 0.55rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 3px solid #FBBF24;
+  display: inline-block;
+}
+
+#addHotelChambreModal .owner-modal__close:hover {
+  background: #EFF6FF;
+  color: #2F64EA;
+}
+
+#addHotelChambreModal .owner-modal__body {
+  background: linear-gradient(180deg, #FFFBEB 0%, #F8FAFC 120px);
+  padding: 1.35rem 1.6rem 1.6rem;
+}
+
+#addHotelChambreModal .owner-form-section {
+  background: #fff;
+  border: 1px solid #DBEAFE;
+  border-radius: 16px;
+  padding: 1.15rem 1.25rem 1.25rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 12px rgba(47, 100, 234, 0.06);
+}
+
+#addHotelChambreModal .owner-form-section:last-child {
+  margin-bottom: 0;
+}
+
+#addHotelChambreModal .owner-form-section--photos {
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFFBEB 100%);
+  border-color: #FBBF24;
+}
+
+#addHotelChambreModal .owner-form-section__title {
+  color: #2F64EA;
+  font-size: 0.92rem;
+  padding-left: 0.75rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+#addHotelChambreModal .owner-form-section__title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.12em;
+  bottom: 0.12em;
+  width: 3px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, #2F64EA 0%, #FBBF24 100%);
+}
+
+#addHotelChambreModal .owner-form-label {
+  color: #2F64EA;
+}
+
+#addHotelChambreModal .owner-form-input:focus {
+  border-color: #2F64EA;
+  box-shadow: 0 0 0 3px rgba(47, 100, 234, 0.18);
+}
+
+#addHotelChambreModal .owner-modal-hint {
+  margin-bottom: 0.85rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #EFF6FF 0%, #FFFBEB 100%);
+  border-left: 3px solid #FBBF24;
+  color: #64748B;
+}
+
+#addHotelChambreModal .owner-chambre-upload-zone {
+  border-color: #DBEAFE;
+  background: linear-gradient(180deg, #FFFFFF 0%, #EFF6FF 55%, #FFFBEB 100%);
+}
+
+#addHotelChambreModal .owner-chambre-upload-zone:hover,
+#addHotelChambreModal .owner-chambre-upload-zone:focus-within {
+  border-color: #FBBF24;
+  background: linear-gradient(180deg, #EFF6FF 0%, #FFFBEB 100%);
+  box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.22);
+}
+
+#addHotelChambreModal .owner-chambre-upload-zone__icon {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #DBEAFE 0%, #FBBF24 100%);
+  border: 1px solid #2F64EA;
+}
+
+#addHotelChambreModal .owner-chambre-upload-zone__title {
+  color: #2F64EA;
+}
+
+#addHotelChambreModal .owner-chambre-gallery__badge,
+#addHotelChambreModal .owner-chambre-gallery__badge--new {
+  background: #FBBF24;
+  color: #2F64EA;
+  font-weight: 800;
+}
+
+#addHotelChambreModal .owner-modal__actions {
+  background: linear-gradient(180deg, #FFFBEB 0%, #FFFFFF 100%);
+  border-top: 1px solid #FBBF24;
+}
+
+#addHotelChambreModal .owner-btn-primary {
+  background-color: #FBBF24;
+  color: #1F2937;
+  border: none;
+  font-weight: 800;
+  box-shadow: 0 8px 20px rgba(251, 191, 36, 0.32);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#addHotelChambreModal .owner-btn-primary:hover {
+  background-color: #FBBF24;
+  color: #1F2937;
+  box-shadow: 0 10px 24px rgba(251, 191, 36, 0.38);
+  transform: translateY(-1px);
+}
+
+#addHotelChambreModal .owner-btn-primary:active {
+  background-color: #2F64EA;
+  color: #FFFFFF;
+  box-shadow: 0 6px 16px rgba(47, 100, 234, 0.28);
+  transform: translateY(0);
+  transition: none;
+}
+
+#addHotelChambreModal .owner-btn-outline {
+  border-color: #2F64EA;
+  color: #2F64EA;
+  background: #fff;
+}
+
+#addHotelChambreModal .owner-btn-outline:hover {
+  background: #EFF6FF;
+  border-color: #2F64EA;
+  color: #2F64EA;
+}
+
+@media (max-width: 640px) {
+  .hotel-add-chambre-card {
+    grid-template-columns: 64px 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .hotel-add-chambre-card__actions {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+}
+
+/* Bouton ajouter chambre (JAUNE) */
+#ajouterChambreBtn {
+  background: #FBBF24;
+  border: none;
+  border-radius: 40px;
+  padding: 14px 24px;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1F2937;
+  cursor: pointer;
+  margin: 8px 0 12px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+#ajouterChambreBtn:hover {
+  background: #F59E0B;
+  transform: translateY(-1px);
+}
+
+/* Compteur chambres */
+.chambres-count {
+  text-align: right;
+  font-size: 13px;
+  color: #6B7280;
+  margin-top: 4px;
+}
+
+/* ==================== BOUTONS FINAUX ==================== */
+form > div:last-child {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 32px;
+  margin-bottom: 0;
+  padding-top: 24px;
+  border-top: 1px solid #E5E7EB;
+}
+
+#btnAnnuler {
+  background: #FFFFFF;
+  border: 1.5px solid #E5E7EB;
+  padding: 10px 28px;
+  border-radius: 40px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  color: #6B7280;
+  transition: all 0.2s;
+}
+
+#btnAnnuler:hover {
+  background: #F9FAFB;
+  border-color: #D1D5DB;
+}
+
+button[type="submit"],
+.hotel-add-submit-btn {
+  background-color: #FBBF24;
+  border: none;
+  padding: 10px 32px;
+  border-radius: 40px;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+  color: #1F2937;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 4px 14px rgba(251, 191, 36, 0.28);
+}
+
+button[type="submit"]:hover,
+.hotel-add-submit-btn:hover {
+  background-color: #FBBF24;
+  color: #1F2937;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(251, 191, 36, 0.35);
+}
+
+button[type="submit"]:active,
+button[type="submit"].is-pressed,
+button[type="submit"].is-pressed:hover,
+.hotel-add-submit-btn:active,
+.hotel-add-submit-btn.is-pressed,
+.hotel-add-submit-btn.is-pressed:hover,
+#createHotelBtn:active,
+#createHotelBtn.is-pressed,
+#createHotelBtn.is-pressed:hover {
+  background-color: #2F64EA !important;
+  color: #FFFFFF !important;
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(47, 100, 234, 0.28);
+  transition: none;
+}
+
+/* ==================== FOOTER (INCHANGÉ) ==================== */
+footer {
+  background: #071739;
+  color: #FFFFFF;
+  margin-top: 80px;
+  padding: 60px 80px 30px;
+}
+
+footer > div:first-child {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 48px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+footer h3, footer h4 {
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+footer p, footer a {
+  color: #D1D5DB;
+  line-height: 1.7;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+footer a:hover {
+  color: #FBBF24;
+}
+
+footer ul {
+  list-style: none;
+}
+
+footer ul li {
+  margin-bottom: 10px;
+}
+
+footer > div:first-child > div:last-child > div {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+footer > div:first-child > div:last-child > div a {
+  background: rgba(255,255,255,0.08);
+  padding: 8px 16px;
+  border-radius: 30px;
+  font-size: 13px;
+}
+
+footer > div:first-child > div:last-child > div a:hover {
+  background: #2F64EA;
+  color: #FFFFFF;
+}
+
+footer > div:last-child {
+  text-align: center;
+  padding-top: 32px;
+  margin-top: 48px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  font-size: 13px;
+  color: #94A3B8;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 768px) {
+  header {
+    padding: 16px 24px;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  header nav ul {
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  main > div:first-child {
+    padding-top: 160px;
+  }
+  
+  main {
+    padding: 0 16px;
+  }
+  
+  main > div:nth-child(2) h2 {
+    font-size: 32px;
+  }
+  
+  main > div:nth-child(2) p {
+    font-size: 16px;
+  }
+  
+  form {
+    padding: 20px;
+  }
+  
+  form > div:last-child {
+    flex-direction: column;
+  }
+  
+  button[type="submit"] {
+    width: 100%;
+  }
+  
+  footer {
+    padding: 40px 24px 20px;
+  }
+  
+  footer > div:first-child {
+    gap: 32px;
+  }
+}
+
+/* ==================== TITRE AVEC "NOUVEL HÔTEL" EN JAUNE ==================== */
+main > div:nth-child(2) h2 {
+  font-size: 48px;
+  font-weight: 700;
+  color: #FFFFFF !important;
+  margin-bottom: 12px;
+}
+
+main > div:nth-child(2) h2 .highlight {
+  color: #FBBF24;
+}
+
+/* Logo marque (appBrand.js) */
+header .logo--upgraded,
+header .app-brand {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+header .app-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+header .app-logo__mark {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+  line-height: 0;
+}
+
+header .app-logo__mark svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+header .app-logo__img--fallback {
+  display: none !important;
+}
+
+header .app-logo__name {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+header .app-logo__name em {
+  font-style: normal;
+  color: #FBBF24;
+}
+
+header .logo h1 {
+  display: none;
+}
+
+/* ==================== CARTE (ajout hôtel) ==================== */
+.hotel-add-map-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.hotel-add-map-btn {
+  background: #FFFFFF;
+  border: 1.5px solid #E5E7EB;
+  border-radius: 40px;
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1F2937;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.hotel-add-map-btn:hover {
+  border-color: #2F64EA;
+  color: #2F64EA;
+  background: #F8FAFC;
+}
+
+.hotel-add-map {
+  height: 280px;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1.5px solid #E5E7EB;
+  background: #F8FAFC;
+  z-index: 0;
+}
+
+/* ==================== ISOLATION (style.css chargé avant) ==================== */
+body.hotel-ajouter-page {
+  font-family: 'Segoe UI', 'Inter', system-ui, sans-serif;
+  background: #F8FAFC;
+  color: #1F2937;
+  overflow-x: hidden;
+}
+
+body.hotel-ajouter-page > header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Retour — espace sous le header fixe */
+body.hotel-ajouter-page .app-back-bar--owner {
+  max-width: min(1140px, 100%);
+  margin: 5.5rem auto 0;
+  padding: 1.25rem clamp(1rem, 3vw, 2rem) 0;
+}
+
+@media (max-width: 768px) {
+  body.hotel-ajouter-page .app-back-bar--owner {
+    margin-top: 9rem;
+    padding-top: 1rem;
+  }
+}
+body.hotel-ajouter-page form button[type="submit"],
+body.hotel-ajouter-page #ajouterChambreBtn,
+body.hotel-ajouter-page .hotel-add-map-btn {
+  font-family: inherit;
+}
+
+body.hotel-ajouter-page #ajouterChambreBtn {
+  background: #FBBF24;
+  border: none;
+  border-radius: 40px;
+  color: #1F2937;
+}
+
+body.hotel-ajouter-page #createHotelBtn.hotel-add-submit-btn {
+  background-color: #FBBF24 !important;
+  color: #1F2937 !important;
+  border: none !important;
+  border-radius: 40px !important;
+  font-weight: 800 !important;
+  box-shadow: 0 4px 14px rgba(251, 191, 36, 0.28) !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+body.hotel-ajouter-page #createHotelBtn.hotel-add-submit-btn:hover {
+  background-color: #FBBF24 !important;
+  color: #1F2937 !important;
+}
+
+body.hotel-ajouter-page #createHotelBtn.hotel-add-submit-btn.is-pressed,
+body.hotel-ajouter-page #createHotelBtn.hotel-add-submit-btn:active,
+body.hotel-ajouter-page #createHotelBtn.hotel-add-submit-btn.is-pressed:hover {
+  background-color: #2F64EA !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 12px rgba(47, 100, 234, 0.28) !important;
+  transition: none;
+}

@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connexion Client - HôtelFacile Smart</title>
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="icon" href="../../images/logo.svg" type="image/svg+xml">
+</head>
+<body class="auth-page" data-auth-role="client">
+
+<header class="header auth-header">
+  <div class="logo logo--upgraded"><a href="Dashboard.html" class="app-brand" aria-label="HôtelFacile Smart — Accueil"><span class="app-logo__mark" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><defs><linearGradient id="hf-logo-bg" x1="64" y1="48" x2="448" y2="464" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#3B82F6"/><stop offset="100%" stop-color="#2F64EA"/></linearGradient></defs><rect width="512" height="512" rx="108" fill="url(#hf-logo-bg)"/><path fill="#FFFFFF" d="M256 108 132 200v188h88V272h72v116h88V200L256 108z"/><rect x="228" y="292" width="56" height="96" rx="6" fill="#2F64EA"/><rect x="204" y="228" width="28" height="28" rx="4" fill="#2F64EA"/><rect x="280" y="228" width="28" height="28" rx="4" fill="#2F64EA"/><circle cx="372" cy="140" r="52" fill="#FBBF24"/><path fill="#FFFFFF" d="M372 108l9 27h29l-23 17 9 27-24-18-24 18 9-27-23-17h29z"/></svg></span><img class="app-logo__img app-logo__img--fallback" src="../../images/logo.svg" alt="" width="56" height="56" decoding="async"><span class="app-logo__text"><span class="app-logo__name">HôtelFacile <em>Smart</em></span></span></a></div>
+  <nav class="nav">
+    <a href="../../Public/html/index.html">Accueil</a>
+    <a href="../../Proprietaire/html/login.html">Espace propriétaire</a>
+    <a href="register.html" class="btn-primary">S'inscrire</a>
+  </nav>
+</header>
+
+<div class="app-back-bar">
+  <button type="button" class="app-back-btn" onclick="if(window.history.length>1){history.back();}else{window.location.href='../../Public/html/index.html';}">
+    <span class="app-back-btn-icon" aria-hidden="true">←</span>
+    Retour
+  </button>
+</div>
+
+<main class="auth-main">
+  <section class="auth-brand auth-brand-client">
+    <div class="auth-brand-content">
+      <span class="auth-brand-badge">Espace client</span>
+      <h1>Réservez votre prochain séjour</h1>
+      <p>Accédez à votre compte pour réserver les meilleurs hôtels au Maroc.</p>
+      <ul class="auth-features">
+        <li>✔ Recherche par ville et budget</li>
+        <li>✔ Suivi des réservations</li>
+        <li>✔ Annulation simplifiée</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="auth-card-wrap">
+    <div class="auth-card">
+      <div class="auth-card-header">
+        <h2>Connexion client</h2>
+        <p class="auth-subtitle">Réservé aux comptes voyageurs</p>
+      </div>
+      <form id="loginForm" class="auth-form">
+        <div class="auth-field">
+          <label for="loginEmail">Adresse email</label>
+          <input type="email" id="loginEmail" placeholder="exemple@email.com" required autocomplete="email">
+        </div>
+        <div class="auth-field">
+          <label for="loginPassword">Mot de passe</label>
+          <input type="password" id="loginPassword" placeholder="Votre mot de passe" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn-primary auth-submit">Se connecter</button>
+      </form>
+
+      <div class="auth-divider"><span>ou</span></div>
+      <div id="googleSignInBtn" class="auth-google-btn-wrap"></div>
+
+      <p id="loginMessage" class="auth-message" role="alert"></p>
+      <div class="auth-links">
+        <p>Pas de compte ? <a href="register.html">Créer un compte client</a></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="footer" class="footer">
+  <div class="footer-container">
+    <div class="footer-section"><h3>🏨 HôtelFacile Smart</h3><p>Réservation d'hôtels au Maroc.</p></div>
+    <div class="footer-section">
+      <h4>Liens</h4>
+      <ul style="list-style:none;padding:0">
+        <li><a href="../../Public/html/index.html">Accueil</a></li>
+        <li><a href="login.html">Connexion</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>Contact</h4>
+      <p>📍 Marrakech, Maroc</p>
+      <p>✉️ contact@hotelfacilesmart.com</p>
+    </div>
+    <div class="footer-section">
+      <h4>Réseaux</h4>
+      <div class="social-icons"><a href="#">📘</a><a href="#">📷</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2025 HôtelFacile Smart.</p></div>
+</footer>
+
+<script src="../../Commun/runtimeConfig.js"></script>
+<script src="../../Commun/authHelpers.js"></script>
+<script src="../js/login.js"></script>
+<script src="../../Commun/google-config.js"></script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="../../Commun/googleAuth.js"></script>
+<script src="../../Commun/appBrand.js" data-base="../../"></script>
+</body>
+</html>
