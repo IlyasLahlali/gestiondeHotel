@@ -36,7 +36,7 @@ function buildChambresUrl(hotelId) {
   if (personnes) q.set("personnes", personnes);
   if (type && type !== "tous") q.set("type", type);
   if (budget) q.set("budget", budget);
-  return `chambreDetail.html?${q.toString()}`;
+  return `reservation.html?${q.toString()}`;
 }
 
 function goHotelDetail(hotelId) {

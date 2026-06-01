@@ -240,12 +240,15 @@ function hideReserveLoginModal() {
 
 function showReserveLoginModal(chambreId) {
   const modal = document.getElementById("reserveLoginModal");
-  if (!modal) return;
-
   const returnPath = buildClientReservationPath(chambreId);
   const returnQuery = encodeURIComponent(returnPath);
   const loginUrl = `../../Client/html/login.html?return=${returnQuery}`;
   const registerUrl = `../../Client/html/register.html?return=${returnQuery}`;
+
+  if (!modal) {
+    window.location.href = loginUrl;
+    return;
+  }
 
   document.getElementById("reserveLoginConfirm").onclick = () => {
     window.location.href = loginUrl;
@@ -341,7 +344,7 @@ async function loadPage() {
     list.querySelectorAll(".chambre-reserve-btn").forEach(btn => {
       btn.addEventListener("click", e => {
         e.stopPropagation();
-        reserver(Number(btn.dataset.chambreId));
+        window.reserver(Number(btn.dataset.chambreId));
       });
     });
   } catch (err) {

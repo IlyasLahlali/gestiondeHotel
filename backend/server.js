@@ -31,6 +31,18 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 const frontendPath = path.join(__dirname, "..", "frontend");
 const { htmlMiddleware, staticMiddleware } = createFrontendStaticMiddleware(frontendPath);
 
+app.use((req, res, next) => {
+  if (req.method !== "GET" && req.method !== "HEAD") return next();
+  if (req.path !== "/Public/html/chambreDetail.html") return next();
+
+  const qs = req.url.includes("?") ? req.url.slice(req.url.indexOf("?")) : "";
+  res.set({
+    "Cache-Control": "no-cache, no-store, must-revalidate",
+    Location: `/Public/html/reservation.html${qs}`
+  });
+  res.status(302).end();
+});
+
 app.use(htmlMiddleware);
 app.use(staticMiddleware);
 

@@ -15,7 +15,7 @@ function buildChambresUrl() {
     const value = params.get(key);
     if (value) q.set(key, value);
   });
-  return `chambreDetail.html?${q.toString()}`;
+  return `reservation.html?${q.toString()}`;
 }
 
 function buildBackUrl(hotel) {
