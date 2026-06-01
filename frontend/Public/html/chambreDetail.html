@@ -3,6 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .chambre-reserve-btn{background:#FBBF24!important;color:#0F172A!important;border:none!important;font-weight:700;box-shadow:0 4px 14px rgba(251,191,36,.38)}
+    .reserve-login-modal{position:fixed;inset:0;z-index:6500;display:flex;align-items:center;justify-content:center;padding:1.25rem;pointer-events:none;opacity:0}
+    .reserve-login-modal[hidden]{display:none!important}
+    .reserve-login-modal.is-open{pointer-events:auto;opacity:1}
+    .reserve-login-modal__backdrop{position:absolute;inset:0;background:rgba(15,23,42,.58);backdrop-filter:blur(8px)}
+    .reserve-login-modal__dialog{position:relative;width:100%;max-width:420px;padding:2rem 1.75rem 1.5rem;text-align:center;background:#fff;border-radius:24px;box-shadow:0 28px 70px rgba(15,23,42,.22)}
+    .reserve-login-modal__primary{background:linear-gradient(135deg,#FBBF24,#F59E0B)!important;color:#0F172A!important;width:100%;min-height:48px;border:none;border-radius:14px;font-weight:700;cursor:pointer}
+    .reserve-login-modal__secondary{width:100%;min-height:48px;border:none;border-radius:14px;font-weight:700;cursor:pointer;background:#F1F5F9;color:#475569}
+  </style>
   <title>Chambres disponibles — HôtelFacile Smart</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -109,5 +119,66 @@
 <script src="../../Commun/hotelImageUrl.js"></script>
 <script src="../../Commun/galleryLightbox.js"></script>
 <script src="../js/chambreDetail.js?v=20260519"></script>
+<script>
+(function () {
+  if (typeof showReserveLoginModal === "function") return;
+
+  var params = new URLSearchParams(window.location.search);
+  var hotelId = params.get("id");
+
+  function buildClientReservationPath(chambreId) {
+    var q = new URLSearchParams(params);
+    q.set("id", hotelId);
+    q.set("chambre", String(chambreId));
+    return "/Client/html/chambreDetail.html?" + q.toString();
+  }
+
+  function hideReserveLoginModal() {
+    var modal = document.getElementById("reserveLoginModal");
+    if (!modal) return;
+    modal.hidden = true;
+    modal.setAttribute("aria-hidden", "true");
+    modal.classList.remove("is-open");
+    document.body.style.overflow = "";
+  }
+
+  window.showReserveLoginModal = function (chambreId) {
+    var modal = document.getElementById("reserveLoginModal");
+    if (!modal) {
+      window.location.href = "../../Client/html/login.html";
+      return;
+    }
+    var returnPath = buildClientReservationPath(chambreId);
+    var returnQuery = encodeURIComponent(returnPath);
+    document.getElementById("reserveLoginConfirm").onclick = function () {
+      window.location.href = "../../Client/html/login.html?return=" + returnQuery;
+    };
+    var registerLink = document.getElementById("reserveLoginRegister");
+    if (registerLink) registerLink.href = "../../Client/html/register.html?return=" + returnQuery;
+    modal.hidden = false;
+    modal.setAttribute("aria-hidden", "false");
+    modal.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+  };
+
+  window.reserver = function (chambreId) {
+    if (!localStorage.getItem("token")) {
+      window.showReserveLoginModal(chambreId);
+      return;
+    }
+    window.location.href = buildClientReservationPath(chambreId);
+  };
+
+  var modal = document.getElementById("reserveLoginModal");
+  if (modal) {
+    modal.querySelectorAll("[data-reserve-modal-close]").forEach(function (el) {
+      el.addEventListener("click", hideReserveLoginModal);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && modal.classList.contains("is-open")) hideReserveLoginModal();
+    });
+  }
+})();
+</script>
 </body>
 </html>

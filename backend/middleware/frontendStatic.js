@@ -18,19 +18,43 @@ function resolveAssetVersion() {
   return String(raw).slice(0, 12);
 }
 
+function parseCookies(req) {
+  const header = req.headers.cookie || "";
+  return Object.fromEntries(
+    header
+      .split(";")
+      .map(part => part.trim())
+      .filter(Boolean)
+      .map(part => {
+        const index = part.indexOf("=");
+        if (index === -1) return [part, ""];
+        return [part.slice(0, index), decodeURIComponent(part.slice(index + 1))];
+      })
+  );
+}
+
 function injectAssetVersion(html, assetVersion) {
-  const versioned = html.replace(
+  const metaTags = [
+    `<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">`,
+    `<meta http-equiv="Pragma" content="no-cache">`,
+    `<meta http-equiv="Expires" content="0">`,
+    `<meta name="hf-build" content="${assetVersion}">`
+  ].join("");
+
+  const reloadGuard = `<script>(function(){var v="${assetVersion}",k="hf_build";try{var p=localStorage.getItem(k);if(p===v)return;localStorage.setItem(k,v);if(location.search.indexOf("hf="+v)<0){var u=new URL(location.href);u.searchParams.set("hf",v);location.replace(u.toString());}}catch(e){}})();</script>`;
+
+  let versioned = html.replace(
     /((?:href|src)\s*=\s*["'])([^"']+\.(?:css|js))(?:\?[^"']*)?(["'])/gi,
     (_, prefix, url, suffix) => `${prefix}${url}?v=${assetVersion}${suffix}`
   );
 
-  const reloadGuard = `<script>(function(){var v="${assetVersion}",k="hf_build";try{if(sessionStorage.getItem(k)===v)return;sessionStorage.setItem(k,v);if(!/_reload=/.test(location.search)){var u=new URL(location.href);u.searchParams.set("_reload","1");location.replace(u.toString());}}catch(e){}})();</script>`;
-
-  if (versioned.includes("</head>")) {
-    return versioned.replace("</head>", `${reloadGuard}</head>`);
+  if (versioned.includes("<head>")) {
+    versioned = versioned.replace("<head>", `<head>${reloadGuard}${metaTags}`);
+  } else {
+    versioned = reloadGuard + metaTags + versioned;
   }
 
-  return reloadGuard + versioned;
+  return versioned;
 }
 
 function resolveHtmlPath(frontendPath, urlPath) {
@@ -63,6 +87,15 @@ function createFrontendStaticMiddleware(frontendPath) {
       Object.entries(NO_CACHE_HEADERS).forEach(([key, value]) => {
         res.setHeader(key, value);
       });
+
+      const cookies = parseCookies(req);
+      if (cookies.hf_cache_cleared !== assetVersion) {
+        res.setHeader("Clear-Site-Data", '"cache"');
+        res.append(
+          "Set-Cookie",
+          `hf_cache_cleared=${assetVersion}; Path=/; Max-Age=31536000; SameSite=Lax`
+        );
+      }
 
       if (req.method === "HEAD") {
         res.type("html").end();
