@@ -33,6 +33,10 @@ async function authPost(endpoint, body) {
   return { res, data };
 }
 
+function normalizeEmail(value) {
+  return String(value || "").trim().toLowerCase();
+}
+
 function bindLoginForm({ formId, endpoint, messageId, redirectUrl }) {
   const form = document.getElementById(formId);
   if (!form) return;
@@ -40,7 +44,7 @@ function bindLoginForm({ formId, endpoint, messageId, redirectUrl }) {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const email = document.getElementById("loginEmail")?.value.trim();
+    const email = normalizeEmail(document.getElementById("loginEmail")?.value);
     const mot_de_passe = document.getElementById("loginPassword")?.value;
     const messageEl = document.getElementById(messageId);
 
@@ -53,7 +57,12 @@ function bindLoginForm({ formId, endpoint, messageId, redirectUrl }) {
       const { res, data } = await authPost(endpoint, { email, mot_de_passe });
 
       if (!res.ok) {
-        setAuthMessage(messageEl, data.message || "Connexion impossible.", true);
+        let msg = data.message || "Connexion impossible.";
+        if (msg === "Utilisateur introuvable") {
+          msg =
+            "Aucun compte avec cet email. Vérifiez l'email ou créez un compte.";
+        }
+        setAuthMessage(messageEl, msg, true);
         return;
       }
 
@@ -81,7 +90,7 @@ function bindRegisterForm({
 
     const nom = document.getElementById("nom")?.value.trim();
     const prenom = document.getElementById("prenom")?.value.trim();
-    const email = document.getElementById("email")?.value.trim();
+    const email = normalizeEmail(document.getElementById("email")?.value);
     const mot_de_passe = document.getElementById(passwordFieldId)?.value;
     const messageEl = document.getElementById(messageId);
 
