@@ -56,6 +56,29 @@ app.use('/api', notificationRoutes);
 //avisRoutes
 app.use('/api', avisRoutes);
 
+app.get('/api/health', (req, res) => {
+  db.query('SELECT 1 AS ok', (err) => {
+    if (err) {
+      return res.status(503).json({
+        ok: false,
+        error: err.message,
+        code: err.code
+      });
+    }
+    db.query('SELECT COUNT(*) AS users FROM utilisateurs', (err2, rows) => {
+      if (err2) {
+        return res.status(503).json({
+          ok: false,
+          error: err2.message,
+          code: err2.code,
+          hint: 'Tables manquantes ? Ré-exécutez init_railway_complet.sql sur Railway MySQL.'
+        });
+      }
+      res.json({ ok: true, users: rows[0]?.users ?? 0 });
+    });
+  });
+});
+
 app.get('/', (req, res) => {
   res.send("API Gestion_Hotel fonctionne 🚀");
 });
