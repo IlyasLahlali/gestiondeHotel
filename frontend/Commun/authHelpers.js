@@ -67,7 +67,9 @@ function bindLoginForm({ formId, endpoint, messageId, redirectUrl }) {
       }
 
       saveAuthSession(data);
-      window.location.href = redirectUrl;
+      const target =
+        typeof redirectUrl === "function" ? redirectUrl() : redirectUrl;
+      window.location.href = target;
     } catch (err) {
       console.error(err);
       setAuthMessage(messageEl, "Erreur serveur.", true);
@@ -121,7 +123,16 @@ function bindRegisterForm({
   });
 }
 
+function resolveAuthReturnUrl(fallback) {
+  const ret = new URLSearchParams(window.location.search).get("return");
+  if (ret && ret.startsWith("/") && !ret.startsWith("//")) {
+    return ret;
+  }
+  return fallback;
+}
+
 window.setAuthMessage = setAuthMessage;
 window.saveAuthSession = saveAuthSession;
 window.bindLoginForm = bindLoginForm;
 window.bindRegisterForm = bindRegisterForm;
+window.resolveAuthReturnUrl = resolveAuthReturnUrl;

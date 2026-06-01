@@ -222,20 +222,68 @@ function renderChambreCard(c) {
   `;
 }
 
-function reserver(chambreId) {
-  const token = localStorage.getItem("token");
+function buildClientReservationPath(chambreId) {
   const q = new URLSearchParams(params);
   q.set("id", hotelId);
   q.set("chambre", String(chambreId));
-  const target = `../../Client/html/chambreDetail.html?${q.toString()}`;
+  return `/Client/html/chambreDetail.html?${q.toString()}`;
+}
+
+function hideReserveLoginModal() {
+  const modal = document.getElementById("reserveLoginModal");
+  if (!modal) return;
+  modal.hidden = true;
+  modal.setAttribute("aria-hidden", "true");
+  modal.classList.remove("is-open");
+  document.body.style.overflow = "";
+}
+
+function showReserveLoginModal(chambreId) {
+  const modal = document.getElementById("reserveLoginModal");
+  if (!modal) return;
+
+  const returnPath = buildClientReservationPath(chambreId);
+  const returnQuery = encodeURIComponent(returnPath);
+  const loginUrl = `../../Client/html/login.html?return=${returnQuery}`;
+  const registerUrl = `../../Client/html/register.html?return=${returnQuery}`;
+
+  document.getElementById("reserveLoginConfirm").onclick = () => {
+    window.location.href = loginUrl;
+  };
+  const registerLink = document.getElementById("reserveLoginRegister");
+  if (registerLink) registerLink.href = registerUrl;
+
+  modal.hidden = false;
+  modal.setAttribute("aria-hidden", "false");
+  modal.classList.add("is-open");
+  document.body.style.overflow = "hidden";
+  document.getElementById("reserveLoginConfirm")?.focus();
+}
+
+function bindReserveLoginModal() {
+  const modal = document.getElementById("reserveLoginModal");
+  if (!modal) return;
+
+  modal.querySelectorAll("[data-reserve-modal-close]").forEach(el => {
+    el.addEventListener("click", hideReserveLoginModal);
+  });
+
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && modal.classList.contains("is-open")) {
+      hideReserveLoginModal();
+    }
+  });
+}
+
+function reserver(chambreId) {
+  const token = localStorage.getItem("token");
 
   if (!token) {
-    alert("Connectez-vous pour réserver.");
-    window.location.href = "../../Client/html/login.html";
+    showReserveLoginModal(chambreId);
     return;
   }
 
-  window.location.href = target;
+  window.location.href = buildClientReservationPath(chambreId);
 }
 
 async function loadPage() {
@@ -302,3 +350,4 @@ async function loadPage() {
 }
 
 loadPage();
+bindReserveLoginModal();
