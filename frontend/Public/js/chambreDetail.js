@@ -276,15 +276,16 @@ function bindReserveLoginModal() {
 }
 
 function reserver(chambreId) {
-  const token = localStorage.getItem("token");
-
-  if (!token) {
-    showReserveLoginModal(chambreId);
+  if (typeof isClientLoggedIn === "function" && isClientLoggedIn()) {
+    window.location.href = buildClientReservationPath(chambreId);
     return;
   }
 
-  window.location.href = buildClientReservationPath(chambreId);
+  showReserveLoginModal(chambreId);
 }
+
+window.showReserveLoginModal = showReserveLoginModal;
+window.reserver = reserver;
 
 async function loadPage() {
   if (!hotelId) {

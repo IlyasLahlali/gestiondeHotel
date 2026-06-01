@@ -131,8 +131,24 @@ function resolveAuthReturnUrl(fallback) {
   return fallback;
 }
 
+function isClientLoggedIn() {
+  const token = localStorage.getItem("token");
+  if (!token) return false;
+
+  const role = localStorage.getItem("role");
+  if (role === "client") return true;
+
+  try {
+    const user = JSON.parse(localStorage.getItem("user") || "null");
+    return user?.role === "client";
+  } catch {
+    return false;
+  }
+}
+
 window.setAuthMessage = setAuthMessage;
 window.saveAuthSession = saveAuthSession;
 window.bindLoginForm = bindLoginForm;
 window.bindRegisterForm = bindRegisterForm;
 window.resolveAuthReturnUrl = resolveAuthReturnUrl;
+window.isClientLoggedIn = isClientLoggedIn;
