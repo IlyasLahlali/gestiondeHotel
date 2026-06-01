@@ -28,7 +28,15 @@ app.use(express.json({ limit: '12mb' }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 const frontendPath = path.join(__dirname, '..', 'frontend');
-app.use(express.static(frontendPath));
+app.use(express.static(frontendPath, {
+  setHeaders(res, filePath) {
+    if (/\.(html|css|js)$/i.test(filePath)) {
+      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+      res.setHeader('Pragma', 'no-cache');
+      res.setHeader('Expires', '0');
+    }
+  }
+}));
 
 //authRoutes
 app.use('/api', authRoutes);
